@@ -1,5 +1,10 @@
 <div class="pl-4 md:flex md:items-center gap-4">
-    <img src="<?php echo e(Storage::url($post->user->avatar)); ?>" class="h-10 w-10 rounded-full mr-3">
+    <?php if($post->user->avatar): ?>
+        <img src="<?php echo e(Storage::url($post->user->avatar)); ?>" class="h-10 w-10 rounded-full mr-3">
+    <?php else: ?>
+        <img src="<?php echo e(asset('images/profile.png')); ?>" class="h-10 w-10 rounded-full mr-3">
+        
+    <?php endif; ?>
     <a href="<?php echo e('/@' . $post->user->username); ?>">
         <h3><?php echo e($post->user->name); ?></h3>
     </a>

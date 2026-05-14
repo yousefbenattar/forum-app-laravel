@@ -23,7 +23,7 @@ class PostFactory extends Factory
             'title' => $title,
             'slug' => Str::slug($title),
             'content' => $this->faker->paragraph(),
-            'image' => 'https://picsum.photos/640/480?random=' . fake()->numberBetween(1, 1000),
+            //'image' => 'https://picsum.photos/640/480?random=' . fake()->numberBetween(1, 1000),
             'user_id' => fake()->numberBetween(1, 10),
             'category_id' => Category::inRandomOrder()->first()->id,
         ];

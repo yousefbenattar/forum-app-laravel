@@ -3,19 +3,27 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
-use App\Models\Comment;
+use App\Models\Stat;
 use App\Models\Post;
 use App\Models\PostView;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
-
 class PostController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
+
         $categories = Category::all();
-        $posts = Post::with(['user', 'category'])->orderBy('id', 'desc')->get();
-        return view("posts.index", ['posts' => $posts, "categories" => $categories]);
+        $stats = Stat::all();
+        $query = Post::with(['user', 'category']);
+
+        if ($request->filled('category')) {
+            $query->where('category_id', $request->category);
+        }
+
+        $posts = $query->latest()->paginate(10)->withQueryString()->onEachSide(1);
+
+        return view("posts.index", ['posts' => $posts, "categories" => $categories, "stats" => $stats]);
     }
     public function show(Post $post)
     {
@@ -27,7 +35,8 @@ class PostController extends Controller
             PostView::create([
                 'post_id' => $post->id,
                 'user_id' => auth()->id(),
-                'ip' => request()->ip()]);
+                'ip' => request()->ip()
+            ]);
             // Set a cooldown for 1 hour
             cache()->put($cacheKey, true, now()->addHours(1));
         }
@@ -51,7 +60,7 @@ class PostController extends Controller
             $validated['image'] = $request->file('image')->store("posts", "public");
         }
         $validated['slug'] = Str::slug($validated['title']);
-        $validated['user_id'] = auth()->id();
+        $validated['user_id'] = auth()->user()->id();
         Post::create($validated);
         return redirect('/');
     }

@@ -33,6 +33,7 @@
         <main class=" ">
             <div class="flex ">
                 <div class="w-1/6">
+                    <x-left-side-bar></x-left-side-bar>
                     
                 </div>
                 <div class="w-4/6">

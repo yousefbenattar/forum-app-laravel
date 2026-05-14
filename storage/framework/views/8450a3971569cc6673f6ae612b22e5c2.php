@@ -9,10 +9,35 @@
 <?php endif; ?>
 <?php $component->withAttributes([]); ?>
     <div>
+
         <div class="h-20 w-auto flex items-center justify-between pl-5">
-            <div class="flex items-center gap-4">
-                <p>فئات</p>
-                <p>جميع المواضيع</p>
+            <div x-data="{
+            stats: <?php echo \Illuminate\Support\Js::from($stats)->toHtml() ?>, 
+            categories: <?php echo \Illuminate\Support\Js::from($categories)->toHtml() ?>,
+            selectedstat :'<?php echo e(request('type')); ?>',
+            selectedCategory: '<?php echo e(request('category')); ?>',
+            filter() {
+           let params = new URLSearchParams(window.location.search);
+        if (this.selectedCategory) {
+            params.set('category', this.selectedCategory);
+        } else {
+            params.delete('category');
+        }
+        params.delete('page');
+        window.location.search = params.toString();
+             }
+      }" class="flex items-center  gap-10">
+                
+
+                <!-- Select 2: Topics (Categories) -->
+                <select x-model="selectedCategory" @change="filter()" class="rounded-md">
+                    <option value="">كل المواضيع</option>
+                    <template x-for="category in categories" :key="category.id">
+                        <!-- Alpine will automatically select this option if category.id == selectedCategory -->
+                        <option :selected="category.id == selectedCategory" :value="category.id" x-text="category.name">
+                        </option>
+                    </template>
+                </select>
             </div>
             <h1 class="text-[#79af9d] text-4xl font-bold pr-5">كل المنشورات</h1>
         </div>
@@ -40,6 +65,9 @@
             <div class="text-center text-gray-400 py-16">لم يتم العثور على أي منشورات</div>
         <?php endif; ?>
     </div>
+
+    <?php echo e($posts->links()); ?>
+
  <?php echo $__env->renderComponent(); ?>
 <?php endif; ?>
 <?php if (isset($__attributesOriginal9ac128a9029c0e4701924bd2d73d7f54)): ?>

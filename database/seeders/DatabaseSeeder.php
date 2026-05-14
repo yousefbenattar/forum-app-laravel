@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 use App\Models\Category;
 use App\Models\Post;
+use App\Models\Stat;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -16,7 +17,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-                $users = [
+        $users = [
 
             [
                 "name" => "Adolf Hitler",
@@ -36,7 +37,7 @@ class DatabaseSeeder extends Seeder
                 "password" => "password",
             ],
 
-             [
+            [
                 "name" => "Winston Churchill",
                 "username" => "winston_churchill",
                 "avatar" => "3.png",
@@ -45,7 +46,7 @@ class DatabaseSeeder extends Seeder
                 "password" => "password",
             ],
 
-             [
+            [
                 "name" => "Franklin D. Roosevelt",
                 "username" => "franklin_roosevelt",
                 "avatar" => "4.png",
@@ -54,7 +55,7 @@ class DatabaseSeeder extends Seeder
                 "password" => "password",
             ],
 
-             [
+            [
                 "name" => "Benito Mussolini",
                 "username" => "benito_mussolini",
                 "avatar" => "5.png",
@@ -72,7 +73,7 @@ class DatabaseSeeder extends Seeder
                 "password" => "password",
             ],
 
-             [
+            [
                 "name" => "Mao Zedong",
                 "username" => "mao_zedong",
                 "avatar" => "7.png",
@@ -81,7 +82,7 @@ class DatabaseSeeder extends Seeder
                 "password" => "password",
             ],
 
-             [
+            [
                 "name" => "Chiang Kai-shek",
                 "username" => "chiang_kaishek",
                 "avatar" => "8.png",
@@ -123,24 +124,29 @@ class DatabaseSeeder extends Seeder
             'Historical Media',
             'Off Topic'
         ];
-        foreach ($categories as $category) {
-            Category::create([
-                'name' => $category,
-                'slug'=> Str::slug($category),
-            ]);
-        }
-       foreach ($users as $user) {
-           User::create([
-            'name'=> $user['name'],
-            'username'=> $user['username'],
-            'avatar'=> $user['avatar'],
-            'bio'=> $user['bio'],
-            'email'=> $user['email'],
-            'password'=> $user['password'],
+        $stats = ['أتابعه', 'مشاركتي', 'أفضل مشاركاتي', 'لا تعليقات', 'الأقل مشاهدة', 'الأقل مشاهدة'];
+        //     foreach ($categories as $category) {
+        //         Category::create([
+        //             'name' => $category,
+        //             'slug'=> Str::slug($category),
+        //         ]);
+        //     }
+        //    foreach ($users as $user) {
+        //        User::create([
+        //         'name'=> $user['name'],
+        //         'username'=> $user['username'],
+        //         'avatar'=> $user['avatar'],
+        //         'bio'=> $user['bio'],
+        //         'email'=> $user['email'],
+        //         'password'=> $user['password'],
 
-           ]);
-        }
-        
-       // Post::factory( 100)->create();
+        //        ]);
+        //     }
+// foreach ($stats as $stat) {
+//                Stat::create([
+//                 'type'=> $stat
+//                ]);
+//             }
+        Post::factory(100)->create();
     }
 }

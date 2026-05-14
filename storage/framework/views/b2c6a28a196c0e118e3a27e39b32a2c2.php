@@ -34,6 +34,25 @@
         <main class=" ">
             <div class="flex ">
                 <div class="w-1/6">
+                    <?php if (isset($component)) { $__componentOriginalce686daa3476e91f7e507f0ea53cd73d = $component; } ?>
+<?php if (isset($attributes)) { $__attributesOriginalce686daa3476e91f7e507f0ea53cd73d = $attributes; } ?>
+<?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'components.left-side-bar','data' => []] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? $attributes->all() : [])); ?>
+<?php $component->withName('left-side-bar'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag): ?>
+<?php $attributes = $attributes->except(\Illuminate\View\AnonymousComponent::ignoredParameterNames()); ?>
+<?php endif; ?>
+<?php $component->withAttributes([]); ?> <?php echo $__env->renderComponent(); ?>
+<?php endif; ?>
+<?php if (isset($__attributesOriginalce686daa3476e91f7e507f0ea53cd73d)): ?>
+<?php $attributes = $__attributesOriginalce686daa3476e91f7e507f0ea53cd73d; ?>
+<?php unset($__attributesOriginalce686daa3476e91f7e507f0ea53cd73d); ?>
+<?php endif; ?>
+<?php if (isset($__componentOriginalce686daa3476e91f7e507f0ea53cd73d)): ?>
+<?php $component = $__componentOriginalce686daa3476e91f7e507f0ea53cd73d; ?>
+<?php unset($__componentOriginalce686daa3476e91f7e507f0ea53cd73d); ?>
+<?php endif; ?>
                     
                 </div>
                 <div class="w-4/6">

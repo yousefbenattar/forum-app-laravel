@@ -1,5 +1,10 @@
 <div class="pl-4 md:flex md:items-center gap-4">
-    <img src="{{Storage::url($post->user->avatar)}}" class="h-10 w-10 rounded-full mr-3">
+    @if ($post->user->avatar)
+        <img src="{{Storage::url($post->user->avatar)}}" class="h-10 w-10 rounded-full mr-3">
+    @else
+        <img src="{{asset('images/profile.png')}}" class="h-10 w-10 rounded-full mr-3">
+        
+    @endif
     <a href="{{'/@' . $post->user->username }}">
         <h3>{{ $post->user->name }}</h3>
     </a>

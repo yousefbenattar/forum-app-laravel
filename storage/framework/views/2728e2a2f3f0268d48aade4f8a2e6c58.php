@@ -1,10 +1,14 @@
 <!-- Added dir="rtl" and a font suitable for Arabic -->
 <a href="/posts/<?php echo e($post->id); ?>" class="group" dir="rtl">
-    <div class="m-5 flex flex-row bg-white border border-gray-200 rounded-md shadow-sm overflow-hidden group-hover:border-[#79af9d]">
-        
-        <!-- 1. Image: Now appears on the right in RTL -->
-        <img class="w-32 h-32 object-cover" src="<?php echo e(Storage::url($post->image)); ?>" alt="<?php echo e($post->title); ?>">
+    <div
+        class="m-5 flex flex-row bg-white border border-gray-200 rounded-md shadow-sm overflow-hidden group-hover:border-[#79af9d]">
 
+        <!-- 1. Image: Now appears on the right in RTL -->
+        <?php if($post->image): ?>
+            <img class="w-32 h-32 object-cover" src="<?php echo e(Storage::url($post->image)); ?>" alt="<?php echo e($post->title); ?>">
+
+        <?php else: ?>
+        <?php endif; ?>
         <!-- 2. Content: Pushes to the left -->
         <div class="flex-1 pt-6 px-4 text-right">
             <h5 class="mb-2 text-2xl font-bold text-gray-900 group-hover:text-[#79af9d]">
@@ -21,7 +25,7 @@
         <div class="flex flex-row items-center justify-between gap-6 p-4 border-r border-gray-100">
             <p class="font-mono text-sm"><?php echo e(Str::limit($post->user->username, 10)); ?></p>
             <p class="text-sm text-gray-500"><?php echo e($post->created_at->format('Y/m/d')); ?></p>
-            
+
             <!-- Comments -->
             <div class="flex flex-row items-center gap-2">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
