@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
-use App\Models\Stat;
 use App\Models\Post;
 use App\Models\PostView;
 use Illuminate\Http\Request;
@@ -13,17 +12,23 @@ class PostController extends Controller
     public function index(Request $request)
     {
 
-        $categories = Category::all();
-        $stats = Stat::all();
         $query = Post::with(['user', 'category']);
 
         if ($request->filled('category')) {
             $query->where('category_id', $request->category);
         }
 
-        $posts = $query->latest()->paginate(10)->withQueryString()->onEachSide(1);
+        $posts = $query->latest()->paginate(10)->withQueryString();
 
-        return view("posts.index", ['posts' => $posts, "categories" => $categories, "stats" => $stats]);
+        // If it's an AJAX request (from Alpine), return a partial view or JSON
+        if ($request->ajax()) {
+            return view('posts._list', compact('posts'))->render();
+        }
+
+        return view("posts.index", [
+            'posts' => $posts,
+            'categories' => Category::all(),
+        ]);
     }
     public function show(Post $post)
     {
@@ -60,7 +65,7 @@ class PostController extends Controller
             $validated['image'] = $request->file('image')->store("posts", "public");
         }
         $validated['slug'] = Str::slug($validated['title']);
-        $validated['user_id'] = auth()->user()->id();
+        $validated['user_id'] = auth()->id();
         Post::create($validated);
         return redirect('/');
     }

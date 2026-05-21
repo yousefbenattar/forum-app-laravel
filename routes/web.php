@@ -9,6 +9,7 @@ use App\Http\Controllers\LikeController;
 use App\Http\Controllers\FollowController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\SearchController;
 
 Route::get('/', [PostController::class, 'index'])->name('dashboard');
 Route::get('/category/{category::id}', [CategoryController::class, 'show']);
@@ -17,6 +18,9 @@ Route::get('/@{username}', [UserController::class, 'show']);
 
 
 Route::middleware(['auth', 'verified'])->group(function () {
+
+    Route::get('/search', [SearchController::class, 'index'])->name('posts.search');
+
 
     Route::get('/post', [PostController::class, 'create'])->name('posts.create');
     Route::post('/post', [PostController::class, 'store'])->name('posts.store');
