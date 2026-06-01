@@ -6,7 +6,16 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\View; // Import the View facade
 use Illuminate\Support\Facades\Http;
-
+use App\Models\BookMark;
+use App\Observers\BookMarkObserver;
+use App\Models\Comment;
+use App\Observers\CommentObserver;
+use App\Models\Follow;
+use App\Observers\FollowObserver;
+use App\Models\Like;
+use App\Observers\LikeObserver;
+use App\Models\Post;
+use App\Observers\PostObserver;
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -22,10 +31,15 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        // Model::preventLazyLoading();
-
+        //Model::preventLazyLoading();
+        BookMark::observe(BookMarkObserver::class);
+        Comment::observe(CommentObserver::class);
+        Follow::observe(FollowObserver::class);
+        Like::observe(LikeObserver::class);
+        Post::observe(PostObserver::class);
+        // load youtube videos
         View::composer('components.left-side-bar', function ($view) {
-            // Cache the videos for 60 minutes
+            // Cache the videos for 24h minutes
             $videos = cache()->remember('youtube_videos', 86400, function () {
                 $apiKey = env('YOUTUBE_API_KEY');
                 $channelId = 'UCs9Uo3cwoLRJhJKcnpsYwZA'; // Use the UC... ID here
@@ -40,7 +54,8 @@ class AppServiceProvider extends ServiceProvider
                 ]);
 
                 return $response->json()['items'] ?? [];
-            });;
+            });
+            ;
             $view->with('videos', $videos);
         });
 

@@ -29,7 +29,7 @@
                     @if ($post->image)
                         <img src="{{ Storage::url($post->image) }}" alt="{{ $post->title }}" class="w-full">
                     @else
-                        
+
                     @endif
 
                     <div class="mt-4">
@@ -45,19 +45,30 @@
                 @auth
                     <!-- Comments Section -->
                     <div class="mt-8" x-data="{liked : false  , content: '', post_id: {{ $post->id }},
-                        comments: {{ $post->comments->load('user')->toJson() }},
-                        errors: {},
-                        submitting:false }">
+                            comments: {{ $post->comments->load('user')->toJson() }},
+                            errors: {},
+                            submitting:false }">
                         <h2 class="text-xl mb-4">Comments</h2>
 
                         <!-- 2. The List (Displays all users' comments) -->
                         <div class="mt-8 space-y-6">
                             <template x-for="comment in comments" :key="comment.id">
                                 <div class="border-b pb-4">
-                                    <div class="flex items-center mb-2">
-                                        <img :src="'/storage/' + comment.user.avatar.replace('public/', '')"
+                                    <div class="flex justify-between items-start">
+                                        <div class="flex items-center mb-2">
+                                            <img :src="'/storage/' + comment.user.avatar.replace('public/', '')"
                                             class="h-8 w-8 rounded-full mr-2">
                                         <span class="font-bold" x-text="comment.user.name"></span>
+                                        </div>
+                                        <div>
+                                            <button class="ml-auto text-sm text-red-500 hover:underline"
+                                            @click.prevent="axios.delete('/comment/' + comment.id).then(() => {
+                                                comments = comments.filter(c => c.id !== comment.id);
+                                            })"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+  <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/>
+  <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/>
+</svg></button>
+                                        </div>
                                     </div>
                                     <p class="text-gray-600" x-text="comment.content"></p>
                                     <div class="mt-3 w-full h-10 flex justify-between">
@@ -95,25 +106,25 @@
                         </div>
                         <form @submit.prevent="
 
-                                                                    submitting = true;
-                                                                    errors = {};
-                                                                    axios.post('/comment', { content: content, post_id: post_id })
-                                                                    .then(res => { 
-                                                content = ''; 
-                                                // If you want to see the new comment immediately, add it here:
-                                                comments.push(res.data.comment);
-                                                })
-                                                .catch(err => { 
-                                                if (err.response.status === 422) {
-                                                errors = err.response.data.errors;
-                                                }
-                                                })
-                                                .finally(() => submitting = false);">
+                                                                        submitting = true;
+                                                                        errors = {};
+                                                                        axios.post('/comment', { content: content, post_id: post_id })
+                                                                        .then(res => { 
+                                                    content = ''; 
+                                                    // If you want to see the new comment immediately, add it here:
+                                                    comments.push(res.data.comment);
+                                                    })
+                                                    .catch(err => { 
+                                                    if (err.response.status === 422) {
+                                                    errors = err.response.data.errors;
+                                                    }
+                                                    })
+                                                    .finally(() => submitting = false);">
                             <textarea x-model="content" rows="4" class="w-full p-2 border rounded mb-2" {{-- Fixed: Changed
                                 errors.body to errors.content --}}
                                 :class="errors.content ? 'border-red-500' : 'border-gray-300'"
                                 placeholder="Add a comment...">
-                                                                                                                                                                                    </textarea>
+                                                                                                                                                                                        </textarea>
 
                             <template x-if="errors.content">
                                 <p class="text-red-500 text-sm mb-2" x-text="errors.content[0]"></p>

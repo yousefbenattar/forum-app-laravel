@@ -16,7 +16,7 @@ class ForumAssistant implements Agent, Conversational
      */
     public function instructions(): string
     {
-        return 'You are a helpful resident AI assistant on our community forum. Keep your answers clear, concise, and helpful.';
+        return 'أنت مساعد ذكاء اصطناعي إسمك فرفور الفأر ، مفيد في منتدى مجتمعنا المعني بالتاريخ البديل ،لغتنا الأساسية العربية. لذا، يُرجى إبقاء إجاباتك واضحة وموجزة ومفيدة.';
     }
 
     /**

@@ -14,15 +14,84 @@
 
     <!-- Scripts -->
     <?php echo app('Illuminate\Foundation\Vite')(['resources/css/app.css', 'resources/js/app.js']); ?>
+    <script>
+    document.addEventListener('alpine:init', () => {
+        Alpine.store('aiChat', {
+            newMessage: '',
+            pastConversations: [],
+            activeMessages: [],
+            activeConversationId: null,
+            isLoading: false,
+
+            loadConversations() {
+                fetch('/ai/conversations')
+                    .then(res => res.json())
+                    .then(data => {
+                        this.pastConversations = data.conversations;
+                    });
+            },
+
+            selectConversation(id) {
+                this.activeConversationId = id;
+                this.isLoading = true;
+                fetch(`/ai/conversations/${id}`)
+                    .then(res => res.json())
+                    .then(data => {
+                        this.activeMessages = data.messages;
+                        this.isLoading = false;
+                    });
+            },
+
+            startNewChat() {
+                this.activeConversationId = null;
+                this.activeMessages = [];
+            },
+
+            sendMessage() {
+                if (this.newMessage.trim() === '' || this.isLoading) return;
+
+                const userPrompt = this.newMessage;
+                this.activeMessages.push({ role: 'user', content: userPrompt });
+                this.newMessage = '';
+                this.isLoading = true;
+
+                fetch('/ai-chat', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                    },
+                    body: JSON.stringify({
+                        message: userPrompt,
+                        conversation_id: this.activeConversationId
+                    })
+                })
+                .then(res => res.json())
+                .then(data => {
+                    this.activeMessages.push({ role: 'assistant', content: data.reply });
+                    this.isLoading = false;
+
+                    if (!this.activeConversationId) {
+                        this.activeConversationId = data.conversation_id;
+                        this.loadConversations();
+                    }
+                })
+                .catch(() => {
+                    this.isLoading = false;
+                });
+            }
+        });
+    });
+</script>
 </head>
 
-<body class="font-sans antialiased">
+<body class="font-sans antialiased bg-white">
     <div class="min-h-screen bg-white dark:bg-gray-400">
         <?php echo $__env->make('layouts.navigation', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
 
         <!-- Page Heading -->
         <?php if(isset($header)): ?>
-            <header class="bg-[#79af9d] dark:bg-gray-800 shadow">
+            <header class="bg-[#79af9d] shadow">
                 <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
                     <?php echo e($header); ?>
 
@@ -31,9 +100,8 @@
         <?php endif; ?>
 
         <!-- Page Content -->
-        <main class=" ">
-            <div class="flex ">
-                <div class="w-1/6">
+        <main class="flex ">
+                 <div class="w-1/6">
                     <?php if (isset($component)) { $__componentOriginalce686daa3476e91f7e507f0ea53cd73d = $component; } ?>
 <?php if (isset($attributes)) { $__attributesOriginalce686daa3476e91f7e507f0ea53cd73d = $attributes; } ?>
 <?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'components.left-side-bar','data' => []] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? $attributes->all() : [])); ?>
@@ -80,8 +148,7 @@
 <?php unset($__componentOriginal132d8c9b35c256fe36637b5b175f781a); ?>
 <?php endif; ?>
                 </div>
-            </div>
-        </main>
+         </main>
     </div>
 </body>
 

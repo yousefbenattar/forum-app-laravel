@@ -78,118 +78,16 @@ ring : true ,
     </div>
 
 
-    <template x-teleport="body">
-        <div>
-            <div x-show="sidebarOpen" x-transition.opacity @click="sidebarOpen = false"
-                class="fixed inset-0 bg-black/50 backdrop-blur-sm z-40"></div>
+            <?php echo $__env->make('layouts._sidebarOpen', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
+            <?php echo $__env->make('layouts._searchOpen', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
+            <?php echo $__env->make('layouts._chatAiOpen', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
 
-            <div x-show="sidebarOpen" x-transition:enter="transition transform duration-300"
-                x-transition:enter-start="translate-x-full" x-transition:enter-end="translate-x-0"
-                x-transition:leave="transition transform duration-300" x-transition:leave-start="translate-x-0"
-                x-transition:leave-end="translate-x-full"
-                class="fixed inset-y-0 right-0 w-60 bg-[#79af9d] text-white z-50 p-6 shadow-2xl">
-
-                <div class="flex flex-col justify-end h-full">
-                    <div class="mb-8">
-                        <?php if(auth()->guard()->check()): ?>
-                            <div>
-                                <img class="h-20"
-                                    src="<?php echo e(auth()->user()->avatar ? Storage::url(auth()->user()->avatar) : asset("images/profile.png")); ?>" />
-                            </div>
-
-                        <?php endif; ?>
-                        <div>
-                            <h2 class="text-xl font-bold"><?php echo e(Auth::user()->name ?? 'User'); ?></h2>
-                            <p class="text-xs text-black-400 font-mono"><?php echo e(Auth::user()->email ?? ''); ?></p>
-                        </div>
-                    </div>
-                    <?php if(auth()->guard()->check()): ?>
-
-                        <nav class="space-y-4 font-mono  ">
-                            <a href="/<?php echo e(auth()->user()->id); ?>/bookmarks"
-                                class="block text-lg hover:border rounded-md px-2">إشاراتي المرجعية</a>
-                            <a href=<?php echo e(url('@' . auth()->user()->username)); ?>
-
-                                class="block text-lg hover:border rounded-md  px-2">ملفي الشخصي </a>
-                            <a href="#" class="block text-lg hover:border rounded-md  px-2">إعدادات</a>
-                        </nav>
-                    <?php endif; ?>
-
-                    <div class="mt-auto pt-6 border-t border-white-800">
-                        <form method="POST" action="<?php echo e(route('logout')); ?>">
-                            <?php echo csrf_field(); ?>
-                            <button class=" font-mono text-sm hover:text-xl">تسجيل الخروج</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </template>
-
-    <template x-teleport="body">
-        <div x-show="searchOpen" class="fixed inset-0 z-50 bg-black/50 flex items-center py-20 justify-center">
-            <div x-show="searchOpen" @click.outside="searchOpen = false"
-                class="flex flex-col gap-2 p-10 bg-[#79af9d] rounded shadow-lg items-center">
-                <h2 class="text-white text-2xl font-bold">
-                    إبدء البحث
-                </h2>
-                <form class="flex gap-2" method="get" action="/search" @keydown.escape="searchOpen = false">
-                    <input required type="text" name="query" id="query" placeholder="اكتب هنا للبحث..." class="rounded-lg p-2
-                        flex-grow w-[400px] border-0 text-gray-800 focus:ring-2 focus:ring-emerald-600">
-                    <button type="submit" class="border border-white rounded text-white px-4 py-2">بحث</button>
-                </form>
-
-            </div>
-        </div>
-    </template>
+    
 
     <!-- ========================================== -->
     <!-- 2. GEMINI AI CHATBOT SIDEBAR (Slides from RIGHT) -->
     <!-- ========================================== -->
-    <template x-teleport="body">
-        <div>
-            <!-- Backdrop -->
-            <div x-show="chatAiOpen" x-transition.opacity @click="chatAiOpen = false"
-                class="fixed inset-0 bg-black/50 backdrop-blur-sm z-40"></div>
-
-            <!-- Chat Panel -->
-            <div x-show="chatAiOpen" x-transition:enter="transition transform duration-300"
-                x-transition:enter-start="translate-x-full" x-transition:enter-end="translate-x-0"
-                x-transition:leave="transition transform duration-300" x-transition:leave-start="translate-x-0"
-                x-transition:leave-end="translate-x-full"
-                class="fixed inset-y-0 right-0 w-80 md:w-96 bg-white text-black z-50 p-6 shadow-2xl flex flex-col justify-between"
-                dir="rtl">
-
-                <!-- Chat Header -->
-                <div class="flex items-center justify-between border-b border-white/20 pb-4">
-                    <h3 class="font-bold text-lg flex items-center gap-2">🤖 مساعد الذكاء الاصطناعي</h3>
-                    <button @click="chatAiOpen = false" class="text-white/80 hover:text-white transition-colors">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
-                            stroke="currentColor" class="w-6 h-6">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
-                        </svg>
-                    </button>
-                </div>
-
-                <!-- Messages Area -->
-                <div class="flex-1 my-4 overflow-y-auto pr-1 text-right space-y-4">
-                    <div class="bg-white/10 p-3 rounded-lg text-sm inline-block max-w-[85%]">
-                        مرحباً بك! كيف يمكنني مساعدتك في المنتدى اليوم؟
-                    </div>
-                </div>
-
-                <!-- Input Box -->
-                <div class="pt-4 border-t border-white/20">
-                    <div class="relative flex items-center gap-2">
-                        <button>أرسل</button>
-                        <input type="text" placeholder="اسأل جيمي..."
-                    class="w-full pl-10 pr-4 py-2 rounded-lg bg-white/10 text-white border border-white/20 text-sm text-right">
-
-                    </div>
-                </div>
-            </div>
-        </div>
-    </template>
+   
 
 
 </nav><?php /**PATH E:\Laravel-2026\forum\resources\views/layouts/navigation.blade.php ENDPATH**/ ?>

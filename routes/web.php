@@ -10,6 +10,14 @@ use App\Http\Controllers\FollowController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\SearchController;
+use App\Http\Controllers\AiChatController;
+use App\Http\Controllers\ActivityController;
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/ai/conversations', [AiChatController::class, 'index']);
+    Route::get('/ai/conversations/{id}', [AiChatController::class, 'show']);
+    Route::post('/ai-chat', [AiChatController::class, 'handle']);
+});
 
 Route::get('/', [PostController::class, 'index'])->name('dashboard');
 Route::get('/category/{category::id}', [CategoryController::class, 'show']);
@@ -20,13 +28,14 @@ Route::get('/@{username}', [UserController::class, 'show']);
 Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::get('/search', [SearchController::class, 'index'])->name('posts.search');
+    Route::get('/myactvities', [ActivityController::class, 'index'])->name('actvities');
 
 
     Route::get('/post', [PostController::class, 'create'])->name('posts.create');
     Route::post('/post', [PostController::class, 'store'])->name('posts.store');
 
     Route::post('/comment', [CommentController::class, 'create']);
-    Route::delete('/comment', [CommentController::class, 'delete']);
+    Route::delete('/comment/{comment}', [CommentController::class, 'delete']);
     Route::post('/{post:id}/like', [LikeController::class, 'create']);
 
     Route::post('/follow/{user}', [FollowController::class, 'follow']);
