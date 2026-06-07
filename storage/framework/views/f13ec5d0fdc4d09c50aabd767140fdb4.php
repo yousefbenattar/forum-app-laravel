@@ -10,13 +10,8 @@
         <!-- x-init watches the parent scope's variable safely -->
         <div x-show="chatAiOpen" 
              x-init="$watch('chatAiOpen', value => { if (value) $store.aiChat.loadConversations() })"
-             x-transition:enter="transition transform duration-300"
-             x-transition:enter-start="translate-x-full" 
-             x-transition:enter-end="translate-x-0"
-             x-transition:leave="transition transform duration-300" 
-             x-transition:leave-start="translate-x-0"
-             x-transition:leave-end="translate-x-full"
-             class="fixed inset-y-0 right-0 w-full sm:w-1/2 md:w-1/3 bg-white text-black z-50 p-6 shadow-2xl flex flex-col justify-between h-full"
+            
+             class="fixed inset-y-0 left-0 w-full sm:w-1/2 md:w-1/3 bg-white text-black z-50 p-6 shadow-2xl flex flex-col justify-between h-full"
              dir="rtl">
 
             <!-- 1. CHAT HEADER -->

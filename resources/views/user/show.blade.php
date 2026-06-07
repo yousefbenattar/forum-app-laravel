@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="ar" dir="rtl">
 
 <head>
     <meta charset="utf-8">
@@ -32,19 +32,16 @@
         <!-- Page Content -->
         <main class=" ">
             <div class="flex ">
+                <div class="w-1/5 pr-10">
+                    <x-profile_section :user="$user"></x-profile_section>
+                </div>
+
                 <div class="w-4/5">
                     @forelse ($posts as $post)
                         <x-post-item :post="$post"></x-post-item>
                     @empty
                         <div class="text-center text-gray-400 py-16">No Posts Found</div>
                     @endforelse
-                </div>
-                <div class="w-1/5">
-                    <x-profile_section :user="$user"></x-profile_section>
-                    @auth
-                         
-                    @endauth
-
                 </div>
             </div>
 

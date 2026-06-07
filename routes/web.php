@@ -4,7 +4,6 @@ use App\Http\Controllers\BookmarkController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\FollowController;
 use App\Http\Controllers\UserController;
@@ -12,19 +11,26 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\AiChatController;
 use App\Http\Controllers\ActivityController;
+use App\Http\Controllers\ConversationController;
+use Illuminate\Support\Facades\Route;
 
+// AI Chat Routes
 Route::middleware(['auth'])->group(function () {
     Route::get('/ai/conversations', [AiChatController::class, 'index']);
     Route::get('/ai/conversations/{id}', [AiChatController::class, 'show']);
     Route::post('/ai-chat', [AiChatController::class, 'handle']);
 });
-
+// Web Routes
 Route::get('/', [PostController::class, 'index'])->name('dashboard');
 Route::get('/category/{category::id}', [CategoryController::class, 'show']);
 Route::get('/posts/{post}', [PostController::class, 'show']);
 Route::get('/@{username}', [UserController::class, 'show']);
 
+// Conversation Routes
+Route::post('/add_to_conversations/{id}', [ConversationController::class, 'create']);
+Route::livewire('/chat', 'pages::chat.index')->name('chat.index');
 
+// Other routes...
 Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::get('/search', [SearchController::class, 'index'])->name('posts.search');

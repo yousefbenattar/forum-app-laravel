@@ -29,16 +29,14 @@ foreach ($attributes->all() as $__key => $__value) {
 unset($__defined_vars, $__key, $__value); ?>
 
 
-
-
-<div class="min-h-screen bg-white p-8 text-black font-sans">
-    <h2 class="justify-items-right w-full">أحدث مقاطعنا 👇</h2>
-    <?php $__currentLoopData = $videos; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $video): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-        <div class="video-item border border-black rounded-md p-2 my-2">
+<div class="min-h-screen bg-white text-black font-sans pl-2">
+    <p class="flex justify-center w-full text-2xl py-2">أحدث مقاطعنا 👇</p>
+    <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::openLoop(); ?><?php endif; ?><?php $__currentLoopData = $videos; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $video): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::startLoopIteration(); ?><?php endif; ?>
+        <div class="video-item border border-black ">
             <a href="https://www.youtube.com/watch?v=<?php echo e($video['id']['videoId']); ?>" target="_blank">
                 <img src="<?php echo e($video['snippet']['thumbnails']['medium']['url']); ?>" alt="<?php echo e($video['snippet']['title']); ?>">
                 <p><?php echo e($video['snippet']['title']); ?></p>
             </a>
         </div>
-    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+    <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::endLoop(); ?><?php endif; ?><?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::closeLoop(); ?><?php endif; ?>
 </div><?php /**PATH E:\Laravel-2026\forum\resources\views/components/left-side-bar.blade.php ENDPATH**/ ?>

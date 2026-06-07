@@ -8,9 +8,44 @@
 <?php $attributes = $attributes->except(\App\View\Components\AppLayout::ignoredParameterNames()); ?>
 <?php endif; ?>
 <?php $component->withAttributes([]); ?>
-    <div class="flex items-center">
+<?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::processComponentKey($component); ?>
 
-    </div>
+   <div class="space-y-4">
+    <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::openLoop(); ?><?php endif; ?><?php $__currentLoopData = $activities; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $activity): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::startLoopIteration(); ?><?php endif; ?>
+        <div class="p-4 bg-white shadow rounded-lg flex items-center justify-between">
+            <div>
+                <span class="text-xs text-gray-500 block">
+                    <?php echo e($activity->created_at->diffForHumans()); ?>
+
+                </span>
+
+                <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php switch($activity->type ?? $activity->activity_type):
+                    case ('posted'): ?>
+                        <p>You published a new post: <strong><?php echo e($activity->subject->title ?? $activity->title); ?></strong></p>
+                        <?php break; ?>
+
+                    <?php case ('liked'): ?>
+                        <p>You liked a post.</p>
+                        <?php break; ?>
+
+                    <?php case ('commented'): ?>
+                        <p>You commented: <em>"<?php echo e(Str::limit($activity->subject->body ?? $activity->body, 50)); ?>"</em></p>
+                        <?php break; ?>
+
+                    <?php case ('followed'): ?>
+                        <p>You started following someone new.</p>
+                        <?php break; ?>
+
+                    <?php case ('bookmarked'): ?>
+                        <p>You bookmarked an item.</p>
+                        <?php break; ?>
+                <?php endswitch; ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
+            </div>
+        </div>
+    <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::endLoop(); ?><?php endif; ?><?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::closeLoop(); ?><?php endif; ?>
+</div>
+
+
  <?php echo $__env->renderComponent(); ?>
 <?php endif; ?>
 <?php if (isset($__attributesOriginal9ac128a9029c0e4701924bd2d73d7f54)): ?>

@@ -78,16 +78,16 @@ ring : true ,
     </div>
 
 
-            @include('layouts._sidebarOpen')
-            @include('layouts._searchOpen')
-            @include('layouts._chatAiOpen')
+    @include('layouts._sidebarOpen')
+    @include('layouts._searchOpen')
+    @include('layouts._chatAiOpen')
 
-    
+
 
     <!-- ========================================== -->
     <!-- 2. GEMINI AI CHATBOT SIDEBAR (Slides from RIGHT) -->
     <!-- ========================================== -->
-   
+
 
 
 </nav>

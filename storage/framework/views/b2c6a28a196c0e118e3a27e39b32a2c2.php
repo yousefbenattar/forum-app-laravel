@@ -1,19 +1,17 @@
 <!DOCTYPE html>
-<html lang="<?php echo e(str_replace('_', '-', app()->getLocale())); ?>">
+<html lang="ar" dir="rtl">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="csrf-token" content="<?php echo e(csrf_token()); ?>">
-
-    <title><?php echo e(config('app.name', 'Laravel')); ?></title>
+        <title><?php echo e($title ?? config('app.name')); ?></title>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
-    <!-- Scripts -->
-    <?php echo app('Illuminate\Foundation\Vite')(['resources/css/app.css', 'resources/js/app.js']); ?>
+ <!-- Scripts -->
+        <?php echo app('Illuminate\Foundation\Vite')(['resources/css/app.css', 'resources/js/app.js']); ?>
     <script>
     document.addEventListener('alpine:init', () => {
         Alpine.store('aiChat', {
@@ -83,25 +81,54 @@
         });
     });
 </script>
-</head>
+        <?php echo \Livewire\Mechanisms\FrontendAssets\FrontendAssets::styles(); ?>
 
-<body class="font-sans antialiased bg-white">
+    </head>
+   <body class="font-sans antialiased bg-white">
     <div class="min-h-screen bg-white dark:bg-gray-400">
         <?php echo $__env->make('layouts.navigation', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
 
         <!-- Page Heading -->
-        <?php if(isset($header)): ?>
+        <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if(isset($header)): ?>
             <header class="bg-[#79af9d] shadow">
                 <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
                     <?php echo e($header); ?>
 
                 </div>
             </header>
-        <?php endif; ?>
+        <?php endif; ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
 
         <!-- Page Content -->
         <main class="flex ">
-                 <div class="w-1/6">
+            <div class="w-1/6">
+                    <?php if (isset($component)) { $__componentOriginal132d8c9b35c256fe36637b5b175f781a = $component; } ?>
+<?php if (isset($attributes)) { $__attributesOriginal132d8c9b35c256fe36637b5b175f781a = $attributes; } ?>
+<?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'components.right-side-bar','data' => []] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? $attributes->all() : [])); ?>
+<?php $component->withName('right-side-bar'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag): ?>
+<?php $attributes = $attributes->except(\Illuminate\View\AnonymousComponent::ignoredParameterNames()); ?>
+<?php endif; ?>
+<?php $component->withAttributes([]); ?>
+<?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::processComponentKey($component); ?>
+ <?php echo $__env->renderComponent(); ?>
+<?php endif; ?>
+<?php if (isset($__attributesOriginal132d8c9b35c256fe36637b5b175f781a)): ?>
+<?php $attributes = $__attributesOriginal132d8c9b35c256fe36637b5b175f781a; ?>
+<?php unset($__attributesOriginal132d8c9b35c256fe36637b5b175f781a); ?>
+<?php endif; ?>
+<?php if (isset($__componentOriginal132d8c9b35c256fe36637b5b175f781a)): ?>
+<?php $component = $__componentOriginal132d8c9b35c256fe36637b5b175f781a; ?>
+<?php unset($__componentOriginal132d8c9b35c256fe36637b5b175f781a); ?>
+<?php endif; ?>
+                </div>
+                 
+                <div class="w-4/6">
+                    <?php echo e($slot); ?>
+
+                </div>
+                <div class="w-1/6">
                     <?php if (isset($component)) { $__componentOriginalce686daa3476e91f7e507f0ea53cd73d = $component; } ?>
 <?php if (isset($attributes)) { $__attributesOriginalce686daa3476e91f7e507f0ea53cd73d = $attributes; } ?>
 <?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'components.left-side-bar','data' => []] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? $attributes->all() : [])); ?>
@@ -111,7 +138,9 @@
 <?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag): ?>
 <?php $attributes = $attributes->except(\Illuminate\View\AnonymousComponent::ignoredParameterNames()); ?>
 <?php endif; ?>
-<?php $component->withAttributes([]); ?> <?php echo $__env->renderComponent(); ?>
+<?php $component->withAttributes([]); ?>
+<?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::processComponentKey($component); ?>
+ <?php echo $__env->renderComponent(); ?>
 <?php endif; ?>
 <?php if (isset($__attributesOriginalce686daa3476e91f7e507f0ea53cd73d)): ?>
 <?php $attributes = $__attributesOriginalce686daa3476e91f7e507f0ea53cd73d; ?>
@@ -123,33 +152,21 @@
 <?php endif; ?>
                     
                 </div>
-                <div class="w-4/6">
-                    <?php echo e($slot); ?>
-
-                </div>
-                <div class="w-1/6">
-                    <?php if (isset($component)) { $__componentOriginal132d8c9b35c256fe36637b5b175f781a = $component; } ?>
-<?php if (isset($attributes)) { $__attributesOriginal132d8c9b35c256fe36637b5b175f781a = $attributes; } ?>
-<?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'components.right-side-bar','data' => []] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? $attributes->all() : [])); ?>
-<?php $component->withName('right-side-bar'); ?>
-<?php if ($component->shouldRender()): ?>
-<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
-<?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag): ?>
-<?php $attributes = $attributes->except(\Illuminate\View\AnonymousComponent::ignoredParameterNames()); ?>
-<?php endif; ?>
-<?php $component->withAttributes([]); ?> <?php echo $__env->renderComponent(); ?>
-<?php endif; ?>
-<?php if (isset($__attributesOriginal132d8c9b35c256fe36637b5b175f781a)): ?>
-<?php $attributes = $__attributesOriginal132d8c9b35c256fe36637b5b175f781a; ?>
-<?php unset($__attributesOriginal132d8c9b35c256fe36637b5b175f781a); ?>
-<?php endif; ?>
-<?php if (isset($__componentOriginal132d8c9b35c256fe36637b5b175f781a)): ?>
-<?php $component = $__componentOriginal132d8c9b35c256fe36637b5b175f781a; ?>
-<?php unset($__componentOriginal132d8c9b35c256fe36637b5b175f781a); ?>
-<?php endif; ?>
-                </div>
          </main>
     </div>
-</body>
+        <?php echo \Livewire\Mechanisms\FrontendAssets\FrontendAssets::scripts(); ?>
 
-</html><?php /**PATH E:\Laravel-2026\forum\resources\views/layouts/app.blade.php ENDPATH**/ ?>
+</body>
+<footer>
+    <div class="bg-[#79af9d]  text-center text-white mt-2 py-4">
+    
+    جميع الحقوق محفوظة لمنتدى التاريخ البديل
+        &copy; <?php echo e(date('Y')); ?>
+
+
+
+    </div>
+</footer>
+   
+</html>
+<?php /**PATH E:\Laravel-2026\forum\resources\views/layouts/app.blade.php ENDPATH**/ ?>

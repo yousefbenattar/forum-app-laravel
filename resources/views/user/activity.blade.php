@@ -33,10 +33,10 @@
     @endforeach
 </div>
 
-{{-- If you used Method 1, you can render pagination links smoothly: --}}
+{{-- If you used Method 1, you can render pagination links smoothly:
 @if(method_exists($activities, 'links'))
     <div class="mt-4">
         {{ $activities->links() }}
     </div>
-@endif
+@endif --}}
 </x-app-layout>

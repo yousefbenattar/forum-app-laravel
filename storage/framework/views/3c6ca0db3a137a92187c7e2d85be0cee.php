@@ -21,7 +21,7 @@ ring : true ,
 
 
             </div>
-            <?php if(auth()->guard()->check()): ?>
+            <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if(auth()->guard()->check()): ?>
                 <div class="hidden  flex sm:flex sm:items-center sm:ms-6 gap-4">
 
 
@@ -65,29 +65,29 @@ ring : true ,
                         src="<?php echo e(auth()->user()->avatar ? Storage::url(auth()->user()->avatar) : asset('images/profile.png')); ?>"
                         alt="Profile Picture">
                 </div>
-            <?php endif; ?>
-            <?php if(auth()->guard()->guest()): ?>
+            <?php endif; ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
+            <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if(auth()->guard()->guest()): ?>
                 <div class="flex items-center space-x-4">
                     <a href="/register" class="text-white">الإنضمام</a>
                     <a href="/login" class="text-white">تسجيل الدخول</a>
 
                 </div>
-            <?php endif; ?>
+            <?php endif; ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
 
         </div>
     </div>
 
 
-            <?php echo $__env->make('layouts._sidebarOpen', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
-            <?php echo $__env->make('layouts._searchOpen', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
-            <?php echo $__env->make('layouts._chatAiOpen', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
+    <?php echo $__env->make('layouts._sidebarOpen', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
+    <?php echo $__env->make('layouts._searchOpen', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
+    <?php echo $__env->make('layouts._chatAiOpen', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
 
-    
+
 
     <!-- ========================================== -->
     <!-- 2. GEMINI AI CHATBOT SIDEBAR (Slides from RIGHT) -->
     <!-- ========================================== -->
-   
+
 
 
 </nav><?php /**PATH E:\Laravel-2026\forum\resources\views/layouts/navigation.blade.php ENDPATH**/ ?>

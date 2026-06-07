@@ -44,17 +44,22 @@
     }" class="w-full">
 
         <div class="h-20 w-auto flex items-center justify-between pl-5">
+            <!-- 3. Fixed: Added x-text so the title actually updates -->
+            <h1 class="text-[#79af9d] text-4xl font-bold pr-5" x-text="currentTitle"></h1>
+
+            
             <div class="flex items-center gap-10">
+                
                 <select x-model="selectedCategory" @change="filter()" class="rounded-md">
-                    <option value="">كل المواضيع</option>
+                    <option value="">كل المنشورات</option>
                     <template x-for="category in categories" :key="category.id">
                         <option :selected="category.id == selectedCategory" :value="category.id" x-text="category.name"></option>
                     </template>
                 </select>
+
             </div>
             
-            <!-- 3. Fixed: Added x-text so the title actually updates -->
-            <h1 class="text-[#79af9d] text-4xl font-bold pr-5" x-text="currentTitle"></h1>
+            
         </div>
 
         <!-- 4. Fixed: Added the container ID and a smooth loading fade effect -->
