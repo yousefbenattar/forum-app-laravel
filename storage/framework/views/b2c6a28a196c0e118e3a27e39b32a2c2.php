@@ -100,6 +100,7 @@
 
         <!-- Page Content -->
         <main class="flex ">
+            <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if(auth()->guard()->check()): ?>
             <div class="w-1/6">
                     <?php if (isset($component)) { $__componentOriginal132d8c9b35c256fe36637b5b175f781a = $component; } ?>
 <?php if (isset($attributes)) { $__attributesOriginal132d8c9b35c256fe36637b5b175f781a = $attributes; } ?>
@@ -123,7 +124,6 @@
 <?php unset($__componentOriginal132d8c9b35c256fe36637b5b175f781a); ?>
 <?php endif; ?>
                 </div>
-                 
                 <div class="w-4/6">
                     <?php echo e($slot); ?>
 
@@ -152,6 +152,40 @@
 <?php endif; ?>
                     
                 </div>
+            <?php endif; ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
+            <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if(auth()->guard()->guest()): ?>
+                     <div class="w-5/6">
+                    <?php echo e($slot); ?>
+
+                </div>
+                <div class="w-1/6">
+                    <?php if (isset($component)) { $__componentOriginalce686daa3476e91f7e507f0ea53cd73d = $component; } ?>
+<?php if (isset($attributes)) { $__attributesOriginalce686daa3476e91f7e507f0ea53cd73d = $attributes; } ?>
+<?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'components.left-side-bar','data' => []] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? $attributes->all() : [])); ?>
+<?php $component->withName('left-side-bar'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag): ?>
+<?php $attributes = $attributes->except(\Illuminate\View\AnonymousComponent::ignoredParameterNames()); ?>
+<?php endif; ?>
+<?php $component->withAttributes([]); ?>
+<?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::processComponentKey($component); ?>
+ <?php echo $__env->renderComponent(); ?>
+<?php endif; ?>
+<?php if (isset($__attributesOriginalce686daa3476e91f7e507f0ea53cd73d)): ?>
+<?php $attributes = $__attributesOriginalce686daa3476e91f7e507f0ea53cd73d; ?>
+<?php unset($__attributesOriginalce686daa3476e91f7e507f0ea53cd73d); ?>
+<?php endif; ?>
+<?php if (isset($__componentOriginalce686daa3476e91f7e507f0ea53cd73d)): ?>
+<?php $component = $__componentOriginalce686daa3476e91f7e507f0ea53cd73d; ?>
+<?php unset($__componentOriginalce686daa3476e91f7e507f0ea53cd73d); ?>
+<?php endif; ?>
+                    
+                </div>
+            <?php endif; ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
+            
+                 
+                
          </main>
     </div>
         <?php echo \Livewire\Mechanisms\FrontendAssets\FrontendAssets::scripts(); ?>

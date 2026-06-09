@@ -3,24 +3,19 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Message ;
 
-
-class Conversation extends Model
+class Message extends Model
 {
     protected $guarded = [];
-
+    public function conversation()
+    {
+        return $this->belongsTo(Conversation::class);
+    }
     public function sender()
     {
         return $this->belongsTo(User::class, 'sender_id');
     }
-
     public function receiver()
-    {
-        return $this->belongsTo(User::class, 'receiver_id');
-    }
-   public function messages()
-    {
-        return $this->hasMany(Message::class);
+    {        return $this->belongsTo(User::class, 'receiver_id');
     }
 }

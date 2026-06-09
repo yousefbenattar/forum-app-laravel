@@ -6,7 +6,7 @@
 
             <div x-show="sidebarOpen"
                  
-                class="fixed inset-y-0 left-0 w-60 bg-[#79af9d] text-white z-50 p-6 shadow-2xl">
+                class="fixed inset-y-0 right-0 w-60 bg-[#79af9d] text-white z-50 p-6 shadow-2xl">
 
                 <div class="flex flex-col justify-end h-full">
                     <div class="mb-8">

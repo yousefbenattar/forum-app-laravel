@@ -8,23 +8,13 @@ ring : true ,
     <div class=" mx-auto px-4 sm:px-6 lg:px-8 bg-[#79af9d]">
         <div class="flex justify-between h-16">
 
-            <div class="flex">
-
-                <!-- Logo -->
-                <div class="shrink-0 flex items-center">
-                    <a href="/">
-                        <img class="block h-10 w-auto fill-current text-gray-800 dark:text-gray-200"
-                            src="{{ asset('images/banner.png')}}" />
-                    </a>
-                </div>
-
-
-
-            </div>
+           
             @auth
                 <div class="hidden  flex sm:flex sm:items-center sm:ms-6 gap-4">
 
-
+ <img @click="sidebarOpen = !sidebarOpen" class="h-10 w-10 rounded-full cursor-pointer"
+                        src="{{ auth()->user()->avatar ? Storage::url(auth()->user()->avatar) : asset('images/profile.png')}}"
+                        alt="Profile Picture">
 
                     <button @click="searchOpen = true" type="button"
                         class="border rounded-lg px-2 py-1  font-bold  flex text-white items-center gap-2">
@@ -61,19 +51,30 @@ ring : true ,
                     </button>
 
 
-                    <img @click="sidebarOpen = !sidebarOpen" class="h-10 w-10 rounded-full cursor-pointer"
-                        src="{{ auth()->user()->avatar ? Storage::url(auth()->user()->avatar) : asset('images/profile.png')}}"
-                        alt="Profile Picture">
+                   
                 </div>
             @endauth
             @guest
-                <div class="flex items-center space-x-4">
+                <div class="flex items-center space-x-4 gap-4">
                     <a href="/register" class="text-white">الإنضمام</a>
                     <a href="/login" class="text-white">تسجيل الدخول</a>
 
                 </div>
             @endguest
 
+             <div class="flex">
+
+                <!-- Logo -->
+                <div class="shrink-0 flex items-center">
+                    <a href="/">
+                        <img class="block h-10 w-auto fill-current text-gray-800 dark:text-gray-200"
+                            src="{{ asset('images/banner.png')}}" />
+                    </a>
+                </div>
+
+
+
+            </div>
         </div>
     </div>
 

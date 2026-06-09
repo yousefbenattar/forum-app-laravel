@@ -83,4 +83,8 @@ public function bookmarkedPosts()
 {
     return $this->belongsToMany(Post::class, 'bookmarks', 'user_id', 'post_id');
 }
+public function conversation()
+{
+    return $this->hasMany(Conversation::class, 'sender_id')->orWhere('receiver_id', $this->id);
+}
 }

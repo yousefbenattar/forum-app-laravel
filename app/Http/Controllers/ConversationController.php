@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Conversation;
-use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -22,13 +21,34 @@ class ConversationController extends Controller
      */
     public function create(int $id)
     {
+        $sender_id = Auth::id();
+        $receiver_id = $id;
+
+        $exists = Conversation::where(['sender_id' => $sender_id, 'receiver_id' => $receiver_id,])
+            ->orWhere([
+                'sender_id' => $receiver_id,
+                'receiver_id' => $sender_id,
+            ])
+            ->exists();
+        if ($sender_id === $receiver_id) {
+            return back();
+        }
+        if ($exists) {
+            return redirect()->route('chat.index');
+
+        }
+
+
         Conversation::create(
             [
-                "sender_id" =>Auth::id(),
-                "receiver_id" =>$id
+                "sender_id" => $sender_id,
+                "receiver_id" => $receiver_id
             ]
         );
         return redirect()->route('chat.index');
+
+
+
     }
 
     /**

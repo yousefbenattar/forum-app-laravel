@@ -14,7 +14,7 @@
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
     <!-- Scripts -->
-    <?php echo app('Illuminate\Foundation\Vite')(['resources/css/app.css', 'resources/js/app.js']); ?>
+    <?php echo app('Illuminate\Foundation\Vite')(['resources/css/app.css']); ?>
     <script>
         document.addEventListener('alpine:init', () => {
             Alpine.store('aiChat', {
@@ -109,6 +109,8 @@
 
         </main>
     </div>
+    <?php echo \Livewire\Mechanisms\FrontendAssets\FrontendAssets::scripts(); ?>
+
 </body>
 
 </html><?php /**PATH E:\Laravel-2026\forum\resources\views/layouts/app2.blade.php ENDPATH**/ ?>

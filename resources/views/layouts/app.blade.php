@@ -98,10 +98,10 @@
 
         <!-- Page Content -->
         <main class="flex ">
+            @auth
             <div class="w-1/6">
                     <x-right-side-bar></x-right-side-bar>
                 </div>
-                 
                 <div class="w-4/6">
                     {{ $slot }}
                 </div>
@@ -109,6 +109,19 @@
                     <x-left-side-bar></x-left-side-bar>
                     
                 </div>
+            @endauth
+            @guest
+                     <div class="w-5/6">
+                    {{ $slot }}
+                </div>
+                <div class="w-1/6">
+                    <x-left-side-bar></x-left-side-bar>
+                    
+                </div>
+            @endguest
+            
+                 
+                
          </main>
     </div>
         @livewireScripts

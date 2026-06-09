@@ -11,7 +11,7 @@
         <div x-show="chatAiOpen" 
              x-init="$watch('chatAiOpen', value => { if (value) $store.aiChat.loadConversations() })"
             
-             class="fixed inset-y-0 left-0 w-full sm:w-1/2 md:w-1/3 bg-white text-black z-50 p-6 shadow-2xl flex flex-col justify-between h-full"
+             class="fixed inset-y-0 right-0 w-full sm:w-1/2 md:w-1/3 bg-white text-black z-50 p-6 shadow-2xl flex flex-col justify-between h-full"
              dir="rtl">
 
             <!-- 1. CHAT HEADER -->
