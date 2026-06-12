@@ -85,7 +85,7 @@
 
     </head>
    <body class="font-sans antialiased bg-white">
-    <div class="min-h-screen bg-white dark:bg-gray-400">
+    <div class="min-h-screen ">
         <?php echo $__env->make('layouts.navigation', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
 
         <!-- Page Heading -->
@@ -188,7 +188,7 @@
                 
          </main>
     </div>
-        <?php echo \Livewire\Mechanisms\FrontendAssets\FrontendAssets::scripts(); ?>
+             <?php echo \Livewire\Mechanisms\FrontendAssets\FrontendAssets::scripts(); ?>
 
 </body>
 <footer>

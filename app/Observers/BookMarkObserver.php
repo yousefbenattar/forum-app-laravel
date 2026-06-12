@@ -16,6 +16,8 @@ class BookMarkObserver
             'user_id' => $bookmark->user_id,
             'subject_id' => $bookmark->id,
             'subject_type' => Bookmark::class,
+            'type' => 'bookmarked'
+
         ]);
     }
 

@@ -102,25 +102,27 @@ class DatabaseSeeder extends Seeder
         ];
 
         
-        // $categories = [
-        //     ' ماذا لو ؟','نظريات','جغرافيا','التاريخ العسكري','حروب عالمية','تحليلات','الأسئلة','إقتراحات'
-        // ];
-        // foreach ($categories as $category) {
-        //     Category::create([
-        //         'name' => $category,
-        //         'slug' => Str::slug($category),
-        //     ]);
-        // }
-          foreach ($users as $user) {
-              User::create([
-                  'name' => $user['name'],
-                  'username' => $user['username'],
-                  'bio' => $user['bio'],
-                  'email' => $user['email'],
-                  'password' => $user['password'],
+        //  $categories = [
+        //      ' ماذا لو ؟','نظريات','جغرافيا','التاريخ العسكري','حروب عالمية','تحليلات','الأسئلة','إقتراحات'
+        //  ];
+        $categories = [
+            'دول'];
+         foreach ($categories as $category) {
+             Category::create([
+                 'name' => $category,
+                 'slug' => Str::slug($category),
+             ]);
+         }
+        //   foreach ($users as $user) {
+        //       User::create([
+        //           'name' => $user['name'],
+        //           'username' => $user['username'],
+        //           'bio' => $user['bio'],
+        //           'email' => $user['email'],
+        //           'password' => $user['password'],
 
-              ]);
-          }
+        //       ]);
+        //   }
 
     }
 }

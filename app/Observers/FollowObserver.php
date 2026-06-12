@@ -16,6 +16,8 @@ class FollowObserver
             'user_id' => $follow->user_id,
             'subject_id' => $follow->id,
             'subject_type' => Follow::class,
+            'type' => 'followed'
+
         ]);
     }
 

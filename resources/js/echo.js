@@ -3,8 +3,9 @@ import Pusher from 'pusher-js';
 
 window.Pusher = Pusher;
 
+// ⚡ THE CRITICAL FIX: Make sure it's window.Echo, not const echo
 window.Echo = new Echo({
-    broadcaster: 'reverb', // Notice this is set to reverb!
+    broadcaster: 'reverb',
     key: import.meta.env.VITE_REVERB_APP_KEY,
     wsHost: import.meta.env.VITE_REVERB_HOST,
     wsPort: import.meta.env.VITE_REVERB_PORT ?? 80,

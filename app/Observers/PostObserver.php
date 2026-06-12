@@ -16,6 +16,7 @@ class PostObserver
             'user_id' => $post->user_id,
             'subject_id' => $post->id,
             'subject_type' => Post::class,
+            'type' => 'posted'
         ]);
     }
 
@@ -24,7 +25,9 @@ class PostObserver
      */
     public function updated(Post $post): void
     {
-        //
+        // Activity::where('subject_id', $post->id)
+        //     ->where('subject_type', Post::class)
+        //     ->update(['type' => 'updated']);
     }
 
     /**
@@ -32,7 +35,9 @@ class PostObserver
      */
     public function deleted(Post $post): void
     {
-        //
+        // Activity::where('subject_id', $post->id)
+        //     ->where('subject_type', Post::class)
+        //     ->delete();
     }
 
     /**
@@ -40,7 +45,12 @@ class PostObserver
      */
     public function restored(Post $post): void
     {
-        //
+        // Activity::create([
+        //     'user_id' => $post->user_id,
+        //     'subject_id' => $post->id,
+        //     'subject_type' => Post::class,
+        //     'type' => 'restored'
+        // ]);
     }
 
     /**
@@ -48,6 +58,8 @@ class PostObserver
      */
     public function forceDeleted(Post $post): void
     {
-        //
+        // Activity::where('subject_id', $post->id)
+        //     ->where('subject_type', Post::class)
+        //     ->delete();
     }
 }

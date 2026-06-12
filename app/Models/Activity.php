@@ -10,6 +10,7 @@ class Activity extends Model
         'user_id',
         'subject_id',
         'subject_type',
+        'type',
     ];
 
     public function subject()

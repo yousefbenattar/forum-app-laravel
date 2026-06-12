@@ -42,7 +42,7 @@ unset($__defined_vars, $__key, $__value); ?>
         <?php else: ?>
             <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if(auth()->guard()->check()): ?>
                 <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if(Auth::id() !== $user->id): ?>
-                    <form action="/add_to_conversations/<?php echo e($user->id); ?>" method="post">
+                    <form action="/conversations/<?php echo e($user->id); ?>" method="post">
                         <?php echo csrf_field(); ?>
                         <button type="submit">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"

@@ -13,7 +13,7 @@
         @else
             @auth
                 @if (Auth::id() !== $user->id)
-                    <form action="/add_to_conversations/{{ $user->id }}" method="post">
+                    <form action="/conversations/{{ $user->id }}" method="post">
                         @csrf
                         <button type="submit">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"

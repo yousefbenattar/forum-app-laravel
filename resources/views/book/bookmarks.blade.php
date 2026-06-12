@@ -1,4 +1,4 @@
-<x-better>
+<x-app-layout>
      <!-- Page Content -->
         <main class=" ">
             <div class="flex flex-col">
@@ -13,4 +13,4 @@
             </div>
 
         </main>
-</x-better>
+</x-app-layout>

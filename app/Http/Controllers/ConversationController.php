@@ -24,12 +24,15 @@ class ConversationController extends Controller
         $sender_id = Auth::id();
         $receiver_id = $id;
 
-        $exists = Conversation::where(['sender_id' => $sender_id, 'receiver_id' => $receiver_id,])
-            ->orWhere([
-                'sender_id' => $receiver_id,
-                'receiver_id' => $sender_id,
-            ])
-            ->exists();
+        $exists = Conversation::where(function ($query) use ($sender_id, $receiver_id) {
+    $query->where('sender_id', $sender_id)
+          ->where('receiver_id', $receiver_id);
+})
+->orWhere(function ($query) use ($sender_id, $receiver_id) {
+    $query->where('sender_id', $receiver_id)
+          ->where('receiver_id', $sender_id);
+})
+->exists();
         if ($sender_id === $receiver_id) {
             return back();
         }

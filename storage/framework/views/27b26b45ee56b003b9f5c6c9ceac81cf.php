@@ -6,7 +6,7 @@
 
             <div x-show="sidebarOpen"
                  
-                class="fixed inset-y-0 right-0 w-60 bg-[#79af9d] text-white z-50 p-6 shadow-2xl">
+                class="fixed inset-y-0 right-0 w-60 bg-white text-black z-50 p-6 shadow-2xl">
 
                 <div class="flex flex-col justify-end h-full">
                     <div class="mb-8">
@@ -25,9 +25,7 @@
                     <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if(auth()->guard()->check()): ?>
 
                         <nav class="space-y-4 font-mono  ">
-                            <a href="/<?php echo e(auth()->user()->id); ?>/bookmarks"
-                                class="block text-lg hover:border rounded-md px-2">إشاراتي المرجعية</a>
-                            <a href=<?php echo e(url('@' . auth()->user()->username)); ?>
+                           <a href=<?php echo e(url('@' . auth()->user()->username)); ?>
 
                                 class="block text-lg hover:border rounded-md  px-2">ملفي الشخصي </a>
                             <a href="#" class="block text-lg hover:border rounded-md  px-2">إعدادات</a>

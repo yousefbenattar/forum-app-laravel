@@ -14,7 +14,7 @@
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
     <!-- Scripts -->
-    <?php echo app('Illuminate\Foundation\Vite')(['resources/css/app.css']); ?>
+    <?php echo app('Illuminate\Foundation\Vite')(['resources/css/app.css', 'resources/js/app.js']); ?>
     <script>
         document.addEventListener('alpine:init', () => {
             Alpine.store('aiChat', {
@@ -83,7 +83,23 @@
                 }
             });
         });
-    </script>
+   
+   
+   document.addEventListener('alpine:init', () => {
+    Alpine.data('notifications', () => ({
+        unreadCount: 0,
+        init() {
+            // Listen to the private notification channel via Reverb
+            Echo.private(`App.Models.User.${userId}`)
+                ->notification((notification) => {
+                    this.unreadCount++;
+                    // Trigger a toast notification or push to an array
+                    alert(notification.message); 
+                });
+        }
+    }));
+});
+   </script>
 </head>
 
 <body class="font-sans antialiased bg-white">

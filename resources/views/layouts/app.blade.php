@@ -84,7 +84,7 @@
         @livewireStyles
     </head>
    <body class="font-sans antialiased bg-white">
-    <div class="min-h-screen bg-white dark:bg-gray-400">
+    <div class="min-h-screen ">
         @include('layouts.navigation')
 
         <!-- Page Heading -->
@@ -124,7 +124,7 @@
                 
          </main>
     </div>
-        @livewireScripts
+             @livewireScripts
 </body>
 <footer>
     <div class="bg-[#79af9d]  text-center text-white mt-2 py-4">

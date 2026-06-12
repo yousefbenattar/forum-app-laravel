@@ -3,9 +3,10 @@ sidebarOpen: false ,
 searchOpen :false ,
 chatAiOpen :false ,
 ring : true ,
-}" class="bg-[#79af9d] dark:bg-gray-800 border-b border-gray-100 dark:border-gray-700">
+}" 
+class="bg-[#79af9d] dark:bg-gray-800 border-b border-gray-100 dark:border-gray-700">
     <!-- Primary Navigation Menu -->
-    <div class=" mx-auto px-4 sm:px-6 lg:px-8 bg-[#79af9d]">
+    <div class=" mx-auto px-2 sm:px-2 lg:px-8 bg-[#79af9d]">
         <div class="flex justify-between h-16">
 
            
@@ -56,9 +57,8 @@ ring : true ,
             @endauth
             @guest
                 <div class="flex items-center space-x-4 gap-4">
-                    <a href="/register" class="text-white">الإنضمام</a>
                     <a href="/login" class="text-white">تسجيل الدخول</a>
-
+                    <a href="/register" class="text-white">إنشاء حساب</a>
                 </div>
             @endguest
 

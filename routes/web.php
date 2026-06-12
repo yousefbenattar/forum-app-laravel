@@ -12,44 +12,44 @@ use App\Http\Controllers\SearchController;
 use App\Http\Controllers\AiChatController;
 use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\ConversationController;
+use App\Http\Controllers\NotificationController;
 use Illuminate\Support\Facades\Route;
 
-// AI Chat Routes
-Route::middleware(['auth'])->group(function () {
+
+
+Route::get('/', [PostController::class, 'index'])->name('dashboard');
+
+
+Route::middleware('auth')->group(function () {
+
+
+
+
+});
+
+
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/search', [SearchController::class, 'index'])->name('posts.search');
     Route::get('/ai/conversations', [AiChatController::class, 'index']);
     Route::get('/ai/conversations/{id}', [AiChatController::class, 'show']);
     Route::post('/ai-chat', [AiChatController::class, 'handle']);
-});
-// Web Routes
-Route::get('/', [PostController::class, 'index'])->name('dashboard');
-Route::get('/category/{category::id}', [CategoryController::class, 'show']);
-Route::get('/posts/{post}', [PostController::class, 'show']);
-Route::get('/@{username}', [UserController::class, 'show']);
-
-// Conversation Routes
-Route::post('/add_to_conversations/{id}', [ConversationController::class, 'create']);
-Route::livewire('/chat', 'pages::chat.index')->name('chat.index');
-
-// Other routes...
-Route::middleware(['auth', 'verified'])->group(function () {
-
-    Route::get('/search', [SearchController::class, 'index'])->name('posts.search');
     Route::get('/myactvities', [ActivityController::class, 'index'])->name('actvities');
-
-
     Route::get('/post', [PostController::class, 'create'])->name('posts.create');
     Route::post('/post', [PostController::class, 'store'])->name('posts.store');
-
     Route::post('/comment', [CommentController::class, 'create']);
     Route::delete('/comment/{comment}', [CommentController::class, 'delete']);
     Route::post('/{post:id}/like', [LikeController::class, 'create']);
-
     Route::post('/follow/{user}', [FollowController::class, 'follow']);
     Route::delete('/unfollow/{user}', [FollowController::class, 'unfollow']);
     Route::get('/{user_id}/bookmarks', [BookmarkController::class, 'show']);
     Route::post('/{post:id}/bookmark', [BookmarkController::class, 'create']);
     Route::delete('/{post:id}/unbookmark', [BookmarkController::class, 'delete']);
-
+    Route::livewire('/chat/{conversation?}', 'pages::chat.index')->name('chat.index');
+    Route::get('/category/{category::id}', [CategoryController::class, 'show']);
+    Route::get('/posts/{post}', [PostController::class, 'show']);
+    Route::get('/@{username}', [UserController::class, 'show']);
+    Route::post('/conversations/{id}', [ConversationController::class, 'create']);
+    Route::get('/notifications',[NotificationController::class, 'index'])->name('notifications.index');
 });
 
 Route::middleware('auth')->group(function () {

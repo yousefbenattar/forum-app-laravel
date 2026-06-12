@@ -8,7 +8,10 @@ use App\Models\Message ;
 
 class Conversation extends Model
 {
-    protected $guarded = [];
+    protected $fillable = [
+        'sender_id',
+        'receiver_id',
+    ];
 
     public function sender()
     {

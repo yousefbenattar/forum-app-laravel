@@ -1,7 +1,7 @@
 @props(['videos'])
 
 
-<div class="min-h-full bg-white text-black font-sans">
+<div class="min-h-full bg-white pl-2 pt-2 text-black font-sans">
     @foreach($videos as $video)
         <div class="video-item border border-black rounded py-2 mb-1">
             <a href="https://www.youtube.com/watch?v={{ $video['id']['videoId'] }}" target="_blank">

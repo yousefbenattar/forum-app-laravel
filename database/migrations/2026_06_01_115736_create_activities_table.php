@@ -14,6 +14,7 @@ return new class extends Migration {
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->nullableMorphs('subject'); // Adds subject_id and subject_type
+            $table->string('type');
             $table->timestamps();
         });
     }

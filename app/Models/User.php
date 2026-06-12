@@ -10,6 +10,8 @@ use Illuminate\Notifications\Notifiable;
 use App\Models\Post;
 use App\Models\Comment;
 use Laravel\Ai\Concerns\HasConversations; // Add this line
+use Illuminate\Notifications\Messages\MailMessage;
+
 class User extends Authenticatable implements MustVerifyEmail
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
@@ -20,6 +22,23 @@ class User extends Authenticatable implements MustVerifyEmail
      *
      * @var list<string>
      */
+    public function sendEmailVerificationNotification()
+{
+    $this->notify(new class extends \Illuminate\Auth\Notifications\VerifyEmail {
+        public function toMail($notifiable)
+        {
+            $verificationUrl = $this->verificationUrl($notifiable);
+
+            return (new MailMessage)
+                ->subject('تأكيد البريد الإلكتروني - التاريخ البديل')
+                ->greeting('مرحباً ' . $notifiable->name . '!')
+                ->line('شكرًا لتسجيلك في موقعنا. يرجى الضغط على الزر أدناه لتفعيل حسابك وتأكيد بريدك الإلكتروني.')
+                ->action('تأكيد الحساب', $verificationUrl)
+                ->line('إذا لم تقم بإنشاء حساب، فلا داعي لاتخاذ أي إجراء آخر.')
+                ->salutation('أطيب التحيات،' . "\n" . config('app.name'));
+        }
+    });
+}
     protected $fillable = [
         'name',
         'email',

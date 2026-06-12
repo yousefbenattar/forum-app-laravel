@@ -31,12 +31,13 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //Model::preventLazyLoading();
+        Post::observe(PostObserver::class);
         BookMark::observe(BookMarkObserver::class);
         Comment::observe(CommentObserver::class);
         Follow::observe(FollowObserver::class);
         Like::observe(LikeObserver::class);
-        Post::observe(PostObserver::class);
+
+        //Model::preventLazyLoading();
         // load youtube videos
         View::composer('components.left-side-bar', function ($view) {
             // Cache the videos for 24h minutes

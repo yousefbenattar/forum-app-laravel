@@ -8,17 +8,19 @@
 <?php $attributes = $attributes->except(\App\View\Components\GuestLayout::ignoredParameterNames()); ?>
 <?php endif; ?>
 <?php $component->withAttributes([]); ?>
+<?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::processComponentKey($component); ?>
+
     <div class="mb-4 text-sm text-gray-600 dark:text-gray-400">
-        <?php echo e(__('Thanks for signing up! Before getting started, could you verify your email address by clicking on the link we just emailed to you? If you didn\'t receive the email, we will gladly send you another.')); ?>
+        <?php echo e(__('شكراً لتسجيلك! قبل البدء، هل يمكنك التحقق من عنوان بريدك الإلكتروني من خلال النقر على الرابط الذي أرسلناه إليك للتو؟ إذا لم يصلك البريد الإلكتروني، سنقوم بإرسال رابط آخر بكل سرور.')); ?>
 
     </div>
 
-    <?php if(session('status') == 'verification-link-sent'): ?>
+    <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if(session('status') == 'verification-link-sent'): ?>
         <div class="mb-4 font-medium text-sm text-green-600 dark:text-green-400">
-            <?php echo e(__('A new verification link has been sent to the email address you provided during registration.')); ?>
+            <?php echo e(__('تم إرسال رابط تحقق جديد إلى عنوان البريد الإلكتروني الذي قدمته أثناء التسجيل.')); ?>
 
         </div>
-    <?php endif; ?>
+    <?php endif; ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
 
     <div class="mt-4 flex items-center justify-between">
         <form method="POST" action="<?php echo e(route('verification.send')); ?>">
@@ -35,7 +37,9 @@
 <?php $attributes = $attributes->except(\Illuminate\View\AnonymousComponent::ignoredParameterNames()); ?>
 <?php endif; ?>
 <?php $component->withAttributes([]); ?>
-                    <?php echo e(__('Resend Verification Email')); ?>
+<?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::processComponentKey($component); ?>
+
+                    <?php echo e(__('إعادة إرسال بريد التحقق')); ?>
 
                  <?php echo $__env->renderComponent(); ?>
 <?php endif; ?>
@@ -54,7 +58,7 @@
             <?php echo csrf_field(); ?>
 
             <button type="submit" class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800">
-                <?php echo e(__('Log Out')); ?>
+                <?php echo e(__('تسجيل الخروج')); ?>
 
             </button>
         </form>
@@ -68,5 +72,4 @@
 <?php if (isset($__componentOriginal69dc84650370d1d4dc1b42d016d7226b)): ?>
 <?php $component = $__componentOriginal69dc84650370d1d4dc1b42d016d7226b; ?>
 <?php unset($__componentOriginal69dc84650370d1d4dc1b42d016d7226b); ?>
-<?php endif; ?>
-<?php /**PATH E:\Laravel-2026\forum\resources\views/auth/verify-email.blade.php ENDPATH**/ ?>
+<?php endif; ?><?php /**PATH E:\Laravel-2026\forum\resources\views/auth/verify-email.blade.php ENDPATH**/ ?>

@@ -4,6 +4,7 @@ namespace App\Observers;
 
 use App\Models\Comment;
 use App\Models\Activity;
+use App\Notifications\NewCommentNotification;
 
 class CommentObserver
 {
@@ -16,7 +17,15 @@ class CommentObserver
             'user_id' => $comment->user_id,
             'subject_id' => $comment->id,
             'subject_type' => Comment::class,
+            'type' => 'commented'
         ]);
+        // Get the author of the post being commented on
+        $postOwner = $comment->post->user;
+
+        // Optional: Avoid notifying yourself if you comment on your own post
+        if ($postOwner->id !== $comment->user_id) {
+            $postOwner->notify(new NewCommentNotification($comment));
+        }
     }
 
     /**

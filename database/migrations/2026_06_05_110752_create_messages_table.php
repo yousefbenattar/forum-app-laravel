@@ -19,6 +19,7 @@ return new class extends Migration {
             $table->timestamp('read_at')->nullable();
             $table->timestamp('sender_deleted_at')->nullable();
             $table->timestamp('receiver_deleted_at')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

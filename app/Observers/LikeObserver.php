@@ -16,6 +16,7 @@ class LikeObserver
             'user_id' => $like->user_id,
             'subject_id' => $like->id,
             'subject_type' => Like::class,
+            'type' => 'liked'
         ]);
     }
 
