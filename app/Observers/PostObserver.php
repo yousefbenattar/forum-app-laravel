@@ -12,6 +12,9 @@ class PostObserver
      */
     public function created(Post $post): void
     {
+        // Award 20 XP to the author of the post
+        $post->user->addXp(20);
+        // create the activity
         Activity::create([
             'user_id' => $post->user_id,
             'subject_id' => $post->id,
@@ -35,9 +38,12 @@ class PostObserver
      */
     public function deleted(Post $post): void
     {
-        // Activity::where('subject_id', $post->id)
-        //     ->where('subject_type', Post::class)
-        //     ->delete();
+        // Subtract the points if the post is removed
+        $post->user->decrement('xp', 20);
+        
+        Activity::where('subject_id', $post->id)
+            ->where('subject_type', Post::class)
+            ->delete();
     }
 
     /**

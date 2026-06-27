@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Message ;
+use App\Models\Message;
 
 
 class Conversation extends Model
@@ -22,8 +22,18 @@ class Conversation extends Model
     {
         return $this->belongsTo(User::class, 'receiver_id');
     }
-   public function messages()
+    public function messages()
     {
         return $this->hasMany(Message::class);
     }
+    public function latestMessage()
+    {
+        return $this->hasOne(Message::class)->latestOfMany();
+    }
+    public function unreadMessages()
+{
+    return $this->hasMany(Message::class)
+        ->where('receiver_id', auth()->id())
+        ->whereNull('read_at');
+}
 }

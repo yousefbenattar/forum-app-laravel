@@ -9,7 +9,8 @@
 
         @if (Auth::id() == $user->id)
             <a href=" {{ route('profile.edit') }}"><button
-                    class="bg-[#79af9d] text-white px-4 py-2 rounded-lg my-2">Edit</button></a>
+                    class="flex items-center bg-black/10 hover:bg-black/30 text-black font-bold py-2 px-4 rounded-full">تعديل</button>
+                </a>
         @else
             @auth
                 @if (Auth::id() !== $user->id)

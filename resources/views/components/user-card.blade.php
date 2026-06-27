@@ -18,13 +18,13 @@
             <form action="/unfollow/{{ $post->user->id }}" method="POST">
                 @csrf
                 @method('DELETE')
-                <button type="submit" class="text-sm text-red-500 hover:underline">Unfollow</button>
+                <button type="submit" class="text-sm text-red-500 hover:underline">إلغاء المتابعة</button>
             </form>
         @else
             {{-- User is not following: Show Follow --}}
             <form action="/follow/{{ $post->user->id }}" method="post">
                 @csrf
-                <button type="submit" class="text-sm text-green-500 hover:underline">Follow</button>
+                <button type="submit" class="text-sm text-green-500 hover:underline">متابعة</button>
             </form>
         @endif
 
@@ -33,7 +33,7 @@
 
 
     <div class="flex gap-2 text-sm text-gray-500">
-        {{ $post->readTime() }} min read
+        {{ $post->readTime() }} دقيقة قراءة 
         &middot;
         {{ $post->created_at->format('M d, Y') }}
     </div>

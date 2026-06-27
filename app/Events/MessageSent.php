@@ -32,7 +32,10 @@ class MessageSent implements ShouldBroadcastNow
     public function broadcastOn(): array
     {
         return [
+            // 1. Keeps the open chat window updated
             new PrivateChannel('chat.' . $this->message->conversation_id),
+            // 2. Notifies the receiver's sidebar instantly
+            new PrivateChannel('user.' . $this->message->receiver_id),
         ];
     }
 }

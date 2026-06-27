@@ -1,14 +1,14 @@
 <!-- Added dir="rtl" and a font suitable for Arabic -->
 <a href="/posts/<?php echo e($post->id); ?>" class="group" dir="rtl">
-    <div
+    <div 
         class="m-5 flex flex-row bg-white border border-gray-200 rounded-md shadow-sm overflow-hidden group-hover:border-[#79af9d]">
 
         <!-- 1. Image: Now appears on the right in RTL -->
-        <?php if($post->image): ?>
+        <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if($post->image): ?>
             <img class="w-32 h-32 object-cover" src="<?php echo e(Storage::url($post->image)); ?>" alt="<?php echo e($post->title); ?>">
 
         <?php else: ?>
-        <?php endif; ?>
+        <?php endif; ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
         <!-- 2. Content: Pushes to the left -->
         <div class="flex-1 pt-6 px-4 text-right">
             <h5 class="mb-2 text-2xl font-bold text-gray-900 group-hover:text-[#79af9d]">
@@ -51,6 +51,4 @@
         </div>
     </div>
 </a>
-
-
 <?php /**PATH E:\Laravel-2026\forum\resources\views/components/post-item.blade.php ENDPATH**/ ?>

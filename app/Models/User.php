@@ -8,14 +8,16 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use App\Models\Post;
+use App\HasGamification;
 use App\Models\Comment;
 use Laravel\Ai\Concerns\HasConversations; // Add this line
 use Illuminate\Notifications\Messages\MailMessage;
+use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable ,HasConversations;
+    use HasFactory, Notifiable ,HasConversations ,HasRoles ,HasGamification;
 
     /**
      * The attributes that are mass assignable.

@@ -34,9 +34,9 @@ class BookmarkController extends Controller
 
     }
 
-    public function show($user_id)
+    public function show()
     {
-        $user = User::findOrFail($user_id);
+        $user = User::findOrFail(auth()->user()->id);
 
         $posts = $user->bookmarkedPosts()->latest()->get();
 

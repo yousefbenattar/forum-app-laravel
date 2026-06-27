@@ -2,12 +2,16 @@
 
 use App\Models\Conversation;
 use Illuminate\Support\Facades\Broadcast;
-
+use App\Models\User;
 
 Broadcast::channel('App.Models.User.{id}', function ($user, $id) {
     return (int) $user->id === (int) $id;
 });
 
+Broadcast::channel('user.{id}', function (User $user, $id) {
+    // Only allow the user to listen to their own channel
+    return (int) $user->id === (int) $id;
+});
 
 // Match the exact channel structure from your Event class
 Broadcast::channel('chat.{conversationId}', function ($user, $conversationId) {

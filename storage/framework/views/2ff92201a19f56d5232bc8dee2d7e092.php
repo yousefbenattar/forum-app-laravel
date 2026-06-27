@@ -12,75 +12,7 @@
 
  <!-- Scripts -->
         <?php echo app('Illuminate\Foundation\Vite')(['resources/css/app.css', 'resources/js/app.js']); ?>
-    <script>
-    document.addEventListener('alpine:init', () => {
-        Alpine.store('aiChat', {
-            newMessage: '',
-            pastConversations: [],
-            activeMessages: [],
-            activeConversationId: null,
-            isLoading: false,
-
-            loadConversations() {
-                fetch('/ai/conversations')
-                    .then(res => res.json())
-                    .then(data => {
-                        this.pastConversations = data.conversations;
-                    });
-            },
-
-            selectConversation(id) {
-                this.activeConversationId = id;
-                this.isLoading = true;
-                fetch(`/ai/conversations/${id}`)
-                    .then(res => res.json())
-                    .then(data => {
-                        this.activeMessages = data.messages;
-                        this.isLoading = false;
-                    });
-            },
-
-            startNewChat() {
-                this.activeConversationId = null;
-                this.activeMessages = [];
-            },
-
-            sendMessage() {
-                if (this.newMessage.trim() === '' || this.isLoading) return;
-
-                const userPrompt = this.newMessage;
-                this.activeMessages.push({ role: 'user', content: userPrompt });
-                this.newMessage = '';
-                this.isLoading = true;
-
-                fetch('/ai-chat', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-                    },
-                    body: JSON.stringify({
-                        message: userPrompt,
-                        conversation_id: this.activeConversationId
-                    })
-                })
-                .then(res => res.json())
-                .then(data => {
-                    this.activeMessages.push({ role: 'assistant', content: data.reply });
-                    this.isLoading = false;
-
-                    if (!this.activeConversationId) {
-                        this.activeConversationId = data.conversation_id;
-                        this.loadConversations();
-                    }
-                })
-                .catch(() => {
-                    this.isLoading = false;
-                });
-            }
-        });
-    });
-</script>
+     
         
     </head>
    <body class="font-sans antialiased">
@@ -125,6 +57,10 @@
                 </div>
 
                 <div class="w-4/5">
+                    <div class="flex items-center gap-4 mb-6">
+                        <h1 class="text-2xl font-bold py-2">منشوراتي</h1>
+                        
+                    </div>
                     <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::openLoop(); ?><?php endif; ?><?php $__empty_1 = true; $__currentLoopData = $posts; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $post): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::startLoopIteration(); ?><?php endif; ?>
                         <?php if (isset($component)) { $__componentOriginalfb314f739d8d594f4055ce4bb169c909 = $component; } ?>
 <?php if (isset($attributes)) { $__attributesOriginalfb314f739d8d594f4055ce4bb169c909 = $attributes; } ?>
@@ -169,7 +105,5 @@
 </footer>
    
 </html>
-
-
 
  <?php /**PATH E:\Laravel-2026\forum\resources\views/user/show.blade.php ENDPATH**/ ?>

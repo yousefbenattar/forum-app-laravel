@@ -13,6 +13,8 @@ class CommentObserver
      */
     public function created(Comment $comment): void
     {
+        $comment->user->addXp(20);
+       
         Activity::create([
             'user_id' => $comment->user_id,
             'subject_id' => $comment->id,

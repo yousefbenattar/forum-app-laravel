@@ -2,13 +2,11 @@
 
 namespace Database\Seeders;
 use App\Models\Category;
-use App\Models\Post;
-use App\Models\Stat;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Str;
-
+use Database\Seeders\RolesAndPermissionsSeeder;
 class DatabaseSeeder extends Seeder
 {
     use WithoutModelEvents;
@@ -17,6 +15,11 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+
+        $this->call([
+            RolesAndPermissionsSeeder::class,
+        ]);
+
         $users = [
 
             [
@@ -101,18 +104,19 @@ class DatabaseSeeder extends Seeder
 
         ];
 
-        
+
         //  $categories = [
         //      ' ماذا لو ؟','نظريات','جغرافيا','التاريخ العسكري','حروب عالمية','تحليلات','الأسئلة','إقتراحات'
         //  ];
         $categories = [
-            'دول'];
-         foreach ($categories as $category) {
-             Category::create([
-                 'name' => $category,
-                 'slug' => Str::slug($category),
-             ]);
-         }
+            'دول'
+        ];
+        foreach ($categories as $category) {
+            Category::create([
+                'name' => $category,
+                'slug' => Str::slug($category),
+            ]);
+        }
         //   foreach ($users as $user) {
         //       User::create([
         //           'name' => $user['name'],
@@ -125,4 +129,9 @@ class DatabaseSeeder extends Seeder
         //   }
 
     }
+
+
+
 }
+
+
