@@ -1,9 +1,10 @@
 FROM php:8.4-fpm
 
-# Install system dependencies and PHP extensions
-# (including pdo_mysql for your Aiven database)
+# Install system dependencies, PHP extensions, and add Node.js repository
 RUN apt-get update && apt-get install -y \
     git curl libpng-dev libonig-dev libxml2-dev zip unzip nginx \
+    && curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
+    && apt-get install -y確 nodejs \
     && docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd
 
 # Install Composer
@@ -17,6 +18,9 @@ COPY . .
 
 # Install PHP dependencies
 RUN composer install --no-interaction --optimize-autoloader --no-dev
+
+# 🚀 NEW: Install Node dependencies and compile production assets with Vite
+RUN npm install && npm run build
 
 # Setup Nginx configuration to point to Laravel's public/ folder
 RUN echo "server { \n\
@@ -44,5 +48,5 @@ RUN chmod -R 775 /var/www/storage /var/www/bootstrap/cache
 # Expose port 80 for Nginx
 EXPOSE 80
 
-# 1. Run migrations, 2. Start PHP-FPM in the background, 3. Start Nginx in the foreground
+# Run migrations, start PHP-FPM, and run Nginx
 CMD php artisan migrate --force && php-fpm -D && nginx -g "daemon off;"
