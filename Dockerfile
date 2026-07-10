@@ -41,6 +41,8 @@ RUN mkdir -p /var/www/storage/framework/views \
 RUN chown -R www-data:www-data /var/www/storage /var/www/bootstrap/cache
 RUN chmod -R 775 /var/www/storage /var/www/bootstrap/cache
 
-# Expose port and start Nginx + PHP-FPM
+# Expose port 80 for Nginx
 EXPOSE 80
-CMD php-fpm -D && nginx -g 'daemon off;'
+
+# 1. Run migrations, 2. Start PHP-FPM in the background, 3. Start Nginx in the foreground
+CMD php artisan migrate --force && php-fpm -D && nginx -g "daemon off;"
