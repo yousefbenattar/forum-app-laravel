@@ -7,7 +7,7 @@ use App\Models\Post;
 use App\Models\Like;
 use Termwind\Components\Li;
 
-class likeController extends Controller
+class LikeController extends Controller
 {
     public function create(Post $post)
     {

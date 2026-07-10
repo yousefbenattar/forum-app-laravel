@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Container\Attributes\Auth;
 use Illuminate\Database\Eloquent\Model;
 
-class Bookmark extends Model
+class BookMark extends Model
 {
     protected $fillable = [
         'user_id',

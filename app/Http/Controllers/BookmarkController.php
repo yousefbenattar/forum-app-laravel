@@ -2,17 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Bookmark;
+use App\Models\BookMark;
 use App\Models\User;
 use Illuminate\Http\Request;
 
-class BookmarkController extends Controller
+class BookMarkController extends Controller
 {
     public function create($post_id)
     {
         $user_id = auth()->id();
 
-        Bookmark::firstOrCreate(
+        BookMark::firstOrCreate(
             [
                 'user_id' => $user_id,
                 'post_id' => $post_id
@@ -24,7 +24,7 @@ class BookmarkController extends Controller
     {
         $user_id = auth()->id();
 
-        Bookmark::where(
+        BookMark::where(
             [
                 'user_id' => $user_id,
                 'post_id' => $post_id
