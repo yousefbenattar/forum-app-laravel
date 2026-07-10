@@ -1,1 +1,0 @@
-<?php /**PATH E:\Laravel-2026\forum\resources\views\livewire/pages/chat/chat-box.blade.php ENDPATH**/ ?>

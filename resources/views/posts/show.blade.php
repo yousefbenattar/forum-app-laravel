@@ -33,7 +33,7 @@
                     @endif
 
                     <div class="mt-4">
-                        {{ $post->content }}
+                        {!! nl2br(e($post->content)) !!}
                     </div>
                 </div>
 
@@ -45,9 +45,9 @@
                 @auth
                     <!-- Comments Section -->
                     <div class="mt-8" x-data="{liked : false  , content: '', post_id: {{ $post->id }},
-                                comments: {{ $post->comments->load('user')->toJson() }},
-                                errors: {},
-                                submitting:false }">
+                                    comments: {{ $post->comments->load('user')->toJson() }},
+                                    errors: {},
+                                    submitting:false }">
                         <h2 class="text-xl mb-4">Comments</h2>
 
                         <!-- 2. The List (Displays all users' comments) -->
@@ -62,8 +62,8 @@
                                         </div>
                                         <div>
                                             <button class="ml-auto text-sm text-red-500 hover:underline" @click.prevent="axios.delete('/comment/' + comment.id).then(() => {
-                                                    comments = comments.filter(c => c.id !== comment.id);
-                                                })"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                                        comments = comments.filter(c => c.id !== comment.id);
+                                                    })"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
                                                     fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
                                                     <path
                                                         d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z" />
@@ -108,25 +108,25 @@
                         </div>
                         <form @submit.prevent="
 
-                                                                            submitting = true;
-                                                                            errors = {};
-                                                                            axios.post('/comment', { content: content, post_id: post_id })
-                                                                            .then(res => { 
-                                                        content = ''; 
-                                                        // If you want to see the new comment immediately, add it here:
-                                                        comments.push(res.data.comment);
-                                                        })
-                                                        .catch(err => { 
-                                                        if (err.response.status === 422) {
-                                                        errors = err.response.data.errors;
-                                                        }
-                                                        })
-                                                        .finally(() => submitting = false);">
+                                                                                submitting = true;
+                                                                                errors = {};
+                                                                                axios.post('/comment', { content: content, post_id: post_id })
+                                                                                .then(res => { 
+                                                            content = ''; 
+                                                            // If you want to see the new comment immediately, add it here:
+                                                            comments.push(res.data.comment);
+                                                            })
+                                                            .catch(err => { 
+                                                            if (err.response.status === 422) {
+                                                            errors = err.response.data.errors;
+                                                            }
+                                                            })
+                                                            .finally(() => submitting = false);">
                             <textarea x-model="content" rows="4" class="w-full p-2 border rounded mb-2" {{-- Fixed: Changed
                                 errors.body to errors.content --}}
                                 :class="errors.content ? 'border-red-500' : 'border-gray-300'"
                                 placeholder="Add a comment...">
-                                                                                                                                                                                            </textarea>
+                                                                                                                                                                                                </textarea>
 
                             <template x-if="errors.content">
                                 <p class="text-red-500 text-sm mb-2" x-text="errors.content[0]"></p>

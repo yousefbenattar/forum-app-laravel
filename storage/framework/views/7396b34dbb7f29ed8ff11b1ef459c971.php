@@ -113,7 +113,7 @@ unset($__defined_vars, $__key, $__value); ?>
 
             </div>
 
-            <div class="flex items-center gap-2 bg-black/10 hover:bg-black/30 text-black font-bold py-2 px-4 rounded-full">
+            <div class="hidden flex items-center gap-2 bg-black/10 hover:bg-black/30 text-black font-bold py-2 px-4 rounded-full">
                 <p>مشاركة</p>
 
 

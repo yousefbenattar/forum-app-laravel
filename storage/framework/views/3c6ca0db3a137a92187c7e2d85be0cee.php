@@ -43,12 +43,6 @@ ring : true ,
                 <form class="flex gap-2" method="get" action="/search" @keydown.escape="searchOpen = false">
                     <input required type="text" name="query" id="query" placeholder="اكتب هنا للبحث..." class="rounded-lg p-2
                         flex-grow w-[400px] border-0 text-gray-800 focus:ring-2 focus:ring-emerald-600">
-                    <button type="submit" class=" color-white  text-white px-4">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
-                            class="bi bi-search" viewBox="0 0 16 16">
-                            <path
-                                d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
-                        </svg></button>
                 </form>
 
             </div>

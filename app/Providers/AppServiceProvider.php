@@ -15,7 +15,9 @@ use App\Observers\FollowObserver;
 use App\Models\Like;
 use App\Observers\LikeObserver;
 use App\Models\Post;
+use App\Models\News;
 use App\Observers\PostObserver;
+use App\Observers\NewsObserver;
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -32,6 +34,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Post::observe(PostObserver::class);
+        News::observe(NewsObserver::class);
         BookMark::observe(BookMarkObserver::class);
         Comment::observe(CommentObserver::class);
         Follow::observe(FollowObserver::class);

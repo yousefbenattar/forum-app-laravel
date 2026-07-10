@@ -29,14 +29,14 @@ foreach ($attributes->all() as $__key => $__value) {
 unset($__defined_vars, $__key, $__value); ?>
 
 <?php
-    if ($class = $frame->class()) {
-        $source = $class;
+    $class = $frame->class();
+    $operator = $frame->operator();
+    $callable = $frame->callable();
 
-        if ($previous = $frame->previous()) {
-            $source .= $previous->operator();
-            $source .= $previous->callable();
-            $source .= '('.implode(', ', $previous->args()).')';
-        }
+    if ($class && $operator) {
+        $source = $class.$operator.$callable.'('.implode(', ', $frame->args()).')';
+    } elseif ($callable !== 'throw') {
+        $source = $callable.'('.implode(', ', $frame->args()).')';
     } else {
         $source = $frame->source();
     }
@@ -52,6 +52,8 @@ unset($__defined_vars, $__key, $__value); ?>
 <?php $attributes = $attributes->except(\Illuminate\View\AnonymousComponent::ignoredParameterNames()); ?>
 <?php endif; ?>
 <?php $component->withAttributes(['code' => \Illuminate\View\Compilers\BladeCompiler::sanitizeComponentAttribute($source),'language' => 'php','truncate' => true,'class' => 'text-xs min-w-0','data-tippy-content' => ''.e($source).'']); ?>
+<?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::processComponentKey($component); ?>
+
 <?php echo $__env->renderComponent(); ?>
 <?php endif; ?>
 <?php if (isset($__attributesOriginal12cb286571f553eebcbe98210b217f94)): ?>

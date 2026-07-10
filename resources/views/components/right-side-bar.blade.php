@@ -1,5 +1,5 @@
 <div class="flex flex-col mr-2 py-10 gap-4 text-2xl" dir="rtl">
-    <a href="/" class="flex items-center gap-2 hover:bg-[#79af9d]/50">
+    <a href="/" class="flex items-center gap-2 hover:text-[#79af9d]">
         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-house-door"
             viewBox="0 0 16 16">
             <path
@@ -7,7 +7,7 @@
         </svg>
         <p>كل المنشورات</p>
     </a>
-    <a href="/chat" class="flex items-center gap-2 hover:bg-[#79af9d]/50">
+    <a href="/chat" class="flex items-center gap-2 hover:text-[#79af9d]">
         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-chat-text"
             viewBox="0 0 16 16">
             <path
@@ -17,7 +17,7 @@
         </svg>
         <p>محادثات</p>
     </a>
-    <a href="/myactvities" class="flex items-center gap-2 hover:bg-[#79af9d]/50">
+    <a href="/myactvities" class="flex items-center gap-2 hover:text-[#79af9d]">
         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-activity"
             viewBox="0 0 16 16">
             <path fill-rule="evenodd"
@@ -34,12 +34,12 @@
     <a href="/notifications" class="flex items-center gap-2 group relative">
 
         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" 
-            class="bi bi-bell transition-colors duration-200 {{ $hasNotifications ? 'animate-ring text-amber-500' : 'text-gray-700 group-hover:text-indigo-600' }}"
+            class="bi bi-bell transition-colors duration-200 {{ $hasNotifications ? 'animate-ring text-amber-500' : 'text-gray-700 group-hover:text-[#79af9d]' }}"
             viewBox="0 0 16 16">
             <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2M8 1.918l-.797.161A4 4 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4 4 0 0 0-3.203-3.92zM14.22 12c.223.447.481.801.78 1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 1 1.99 0A5 5 0 0 1 13 6c0 .88.32 4.2 1.22 6" />
         </svg>
 
-        <p class="text-2xl font-medium {{ $hasNotifications ? 'text-amber-600' : 'text-gray-700 group-hover:text-indigo-600' }}">
+        <p class="text-2xl font-medium {{ $hasNotifications ? 'text-amber-600' : 'text-gray-700 group-hover:text-[#79af9d]' }}">
             إشعارات
         </p>
 
@@ -52,30 +52,34 @@
 @endauth
     
 
-     <a href="/bookmarks" class="flex items-center gap-2">
+     <a href="/bookmarks" class="flex items-center gap-2 hover:text-[#79af9d]">
        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-bookmark" viewBox="0 0 16 16">
   <path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1z"/>
 </svg>
         <p>إشاراتي المرجعية</p>
     </a>
 
-            <a href="#" class="flex items-center gap-2 hover:bg-[#79af9d]/50">
+            <a href="#" class="flex items-center gap-2 hover:text-[#79af9d]">
       <x-carbon-friendship class="w-6 h-6"/>
         <p>ركن الأصدقاء</p>
     </a>
-             <a href="#" class="flex items-center gap-2 hover:bg-[#79af9d]/50">
+             <a href="/ai" class="flex items-center gap-2 hover:text-[#79af9d]">
       <x-hugeicons-ai-chemistry-03 class="w-6 h-6"/>
         <p>ذكاء إصطناعي</p>
     </a>
-         <a href="#" class="flex items-center gap-2 hover:bg-[#79af9d]/50">
+      
+    <a href="/news" class="flex items-center gap-2 hover:text-[#79af9d]">
+     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-newspaper" viewBox="0 0 16 16">
+  <path d="M0 2.5A1.5 1.5 0 0 1 1.5 1h11A1.5 1.5 0 0 1 14 2.5v10.528c0 .3-.05.654-.238.972h.738a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 1 1 0v9a1.5 1.5 0 0 1-1.5 1.5H1.497A1.497 1.497 0 0 1 0 13.5zM12 14c.37 0 .654-.211.853-.441.092-.106.147-.279.147-.531V2.5a.5.5 0 0 0-.5-.5h-11a.5.5 0 0 0-.5.5v11c0 .278.223.5.497.5z"/>
+  <path d="M2 3h10v2H2zm0 3h4v3H2zm0 4h4v1H2zm0 2h4v1H2zm5-6h2v1H7zm3 0h2v1h-2zM7 8h2v1H7zm3 0h2v1h-2zm-3 2h2v1H7zm3 0h2v1h-2zm-3 2h2v1H7zm3 0h2v1h-2z"/>
+</svg>
+        <p>أخبار الموقع</p>
+    </a>
+       <a href="#" class="flex items-center gap-2 hover:text-[#79af9d]">
      <x-tni-game-controller-o class="w-6 h-6" />
         <p>ألعاب</p>
     </a>
-    <a href="#" class="flex items-center gap-2 hover:bg-[#79af9d]/50">
-     <x-carbon-blog class="w-6 h-6" />
-        <p>مدونة الموقع</p>
-    </a>
-             <a href="#" class="flex items-center gap-2 hover:bg-[#79af9d]/50">
+             <a href="#" class="flex items-center gap-2 hover:text-[#79af9d]">
       <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-patch-question" viewBox="0 0 16 16">
   <path d="M8.05 9.6c.336 0 .504-.24.554-.627.04-.534.198-.815.847-1.26.673-.475 1.049-1.09 1.049-1.986 0-1.325-.92-2.227-2.262-2.227-1.02 0-1.792.492-2.1 1.29A1.7 1.7 0 0 0 6 5.48c0 .393.203.64.545.64.272 0 .455-.147.564-.51.158-.592.525-.915 1.074-.915.61 0 1.03.446 1.03 1.084 0 .563-.208.885-.822 1.325-.619.433-.926.914-.926 1.64v.111c0 .428.208.745.585.745"/>
   <path d="m10.273 2.513-.921-.944.715-.698.622.637.89-.011a2.89 2.89 0 0 1 2.924 2.924l-.01.89.636.622a2.89 2.89 0 0 1 0 4.134l-.637.622.011.89a2.89 2.89 0 0 1-2.924 2.924l-.89-.01-.622.636a2.89 2.89 0 0 1-4.134 0l-.622-.637-.89.011a2.89 2.89 0 0 1-2.924-2.924l.01-.89-.636-.622a2.89 2.89 0 0 1 0-4.134l.637-.622-.011-.89a2.89 2.89 0 0 1 2.924-2.924l.89.01.622-.636a2.89 2.89 0 0 1 4.134 0l-.715.698a1.89 1.89 0 0 0-2.704 0l-.92.944-1.32-.016a1.89 1.89 0 0 0-1.911 1.912l.016 1.318-.944.921a1.89 1.89 0 0 0 0 2.704l.944.92-.016 1.32a1.89 1.89 0 0 0 1.912 1.911l1.318-.016.921.944a1.89 1.89 0 0 0 2.704 0l.92-.944 1.32.016a1.89 1.89 0 0 0 1.911-1.912l-.016-1.318.944-.921a1.89 1.89 0 0 0 0-2.704l-.944-.92.016-1.32a1.89 1.89 0 0 0-1.912-1.911z"/>

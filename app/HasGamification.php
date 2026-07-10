@@ -16,12 +16,10 @@ trait HasGamification
         // Or use a hardcoded lookup array/table
         $nextLevel = $this->level + 1;
         $xpNeeded = $nextLevel * 100; 
-
         if ($this->xp >= $xpNeeded) {
             $this->increment('level');
-            
             // Fire an event to trigger announcements, popups, or log rewards
-           // event(new \App\Events\UserLeveledUp($this, $this->level));
+            // event(new \App\Events\UserLeveledUp($this, $this->level));
         }
     }
 }

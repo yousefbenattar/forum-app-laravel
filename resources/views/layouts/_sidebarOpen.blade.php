@@ -1,5 +1,5 @@
 <template x-teleport="body">
-    <div>
+    <div class=" text-l ">
         <div x-show="sidebarOpen" x-transition.opacity @click="sidebarOpen = false"
             class="fixed inset-0 bg-black/50 backdrop-blur-sm z-40">
         </div>
@@ -17,7 +17,7 @@
                     @endauth
                     <div>
 
-                        <h2 class="text-2xl ">{{ Auth::user()->name ?? 'User' }}</h2>
+                        <h2 class=" ">{{ Auth::user()->name ?? 'User' }}</h2>
 
                     </div>
                 </div>
@@ -25,7 +25,7 @@
 
                     <nav class="space-y-4 gap-4">
                         <a href={{ url('@' . auth()->user()->username) }}
-                            class="block text-2xl hover:text-green-500 flex items-center gap-2">
+                            class="block hover:text-[#79af9d] flex items-center gap-2">
 
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
                                 class="bi bi-person-lines-fill" viewBox="0 0 16 16">
@@ -35,7 +35,7 @@
                             <p>ملفي الشخصي</p>
                         </a>
 
-                        <a href='#' class="block text-2xl hover:text-green-500 flex items-center gap-2">
+                        <a href='#' class="block hover:text-[#79af9d] flex items-center gap-2">
 
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
                                 class="bi bi-gear" viewBox="0 0 16 16">
@@ -46,20 +46,21 @@
                             </svg>
                             <p>إعدادات</p>
                         </a>
-                        <a href='#' class="block text-2xl hover:text-green-500 flex items-center gap-2">
+                        @role('admin')
+                        <a href='/dashboard' class="block text-l hover:text-[#79af9d] flex items-center gap-2">
 
                             <x-ik-dashboard class="w-6 h-6" />
-                            <p>لوحة التحكم</p>
+                            <p>الأدمن</p>
                         </a>
-
+                        @endrole
                     </nav>
                 @endauth
 
                 <div class="mt-auto pt-6 border-t border-white-800">
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
-                        <button class=" text-sm hover:text-xl">تسجيل الخروج</button>
-                            </form>
+                        <button class=" text-sm hover:text-[#79af9d]">تسجيل الخروج</button>
+                    </form>
                 </div>
             </div>
         </div>

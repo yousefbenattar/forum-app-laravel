@@ -48,7 +48,7 @@ new #[Layout('layouts::app')] class extends Component
             </svg>
             <p class="text-2xl">إشاراتي المرجعية : </p>
         </div>
-        @if($this->posts()->isNotEmpty()) 
+        
 
     <form class="px-6 py-4" wire:submit="refreshList">
         <label for="search" class="block mb-2.5 text-sm font-medium text-heading sr-only">بحث</label>
@@ -63,7 +63,7 @@ new #[Layout('layouts::app')] class extends Component
                 placeholder="بحث" required />
         </div>
     </form>
-@endif
+ 
 
         @forelse ($this->posts() as $post)
 

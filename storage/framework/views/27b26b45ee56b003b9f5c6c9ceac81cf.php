@@ -1,5 +1,5 @@
 <template x-teleport="body">
-    <div>
+    <div class=" text-l ">
         <div x-show="sidebarOpen" x-transition.opacity @click="sidebarOpen = false"
             class="fixed inset-0 bg-black/50 backdrop-blur-sm z-40">
         </div>
@@ -17,7 +17,7 @@
                     <?php endif; ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
                     <div>
 
-                        <h2 class="text-2xl "><?php echo e(Auth::user()->name ?? 'User'); ?></h2>
+                        <h2 class=" "><?php echo e(Auth::user()->name ?? 'User'); ?></h2>
 
                     </div>
                 </div>
@@ -26,7 +26,7 @@
                     <nav class="space-y-4 gap-4">
                         <a href=<?php echo e(url('@' . auth()->user()->username)); ?>
 
-                            class="block text-2xl hover:text-green-500 flex items-center gap-2">
+                            class="block hover:text-[#79af9d] flex items-center gap-2">
 
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
                                 class="bi bi-person-lines-fill" viewBox="0 0 16 16">
@@ -36,7 +36,7 @@
                             <p>ملفي الشخصي</p>
                         </a>
 
-                        <a href='#' class="block text-2xl hover:text-green-500 flex items-center gap-2">
+                        <a href='#' class="block hover:text-[#79af9d] flex items-center gap-2">
 
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
                                 class="bi bi-gear" viewBox="0 0 16 16">
@@ -47,7 +47,8 @@
                             </svg>
                             <p>إعدادات</p>
                         </a>
-                        <a href='#' class="block text-2xl hover:text-green-500 flex items-center gap-2">
+                        <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if (\Illuminate\Support\Facades\Blade::check('role', 'admin')): ?>
+                        <a href='/dashboard' class="block text-l hover:text-[#79af9d] flex items-center gap-2">
 
                             <?php if (isset($component)) { $__componentOriginal643fe1b47aec0b76658e1a0200b34b2c = $component; } ?>
 <?php if (isset($attributes)) { $__attributesOriginal643fe1b47aec0b76658e1a0200b34b2c = $attributes; } ?>
@@ -71,17 +72,17 @@
 <?php $component = $__componentOriginal643fe1b47aec0b76658e1a0200b34b2c; ?>
 <?php unset($__componentOriginal643fe1b47aec0b76658e1a0200b34b2c); ?>
 <?php endif; ?>
-                            <p>لوحة التحكم</p>
+                            <p>الأدمن</p>
                         </a>
-
+                        <?php endif; ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
                     </nav>
                 <?php endif; ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
 
                 <div class="mt-auto pt-6 border-t border-white-800">
                     <form method="POST" action="<?php echo e(route('logout')); ?>">
                         <?php echo csrf_field(); ?>
-                        <button class=" text-sm hover:text-xl">تسجيل الخروج</button>
-                            </form>
+                        <button class=" text-sm hover:text-[#79af9d]">تسجيل الخروج</button>
+                    </form>
                 </div>
             </div>
         </div>
