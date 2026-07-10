@@ -32,6 +32,15 @@ RUN echo "server { \n\
         fastcgi_param SCRIPT_FILENAME \$document_root\$fastcgi_script_name; \n\
     } \n}" > /etc/nginx/sites-available/default
 
+# Ensure the storage and bootstrap/cache directories exist and have proper permissions
+RUN mkdir -p /var/www/storage/framework/views \
+             /var/www/storage/framework/cache \
+             /var/www/storage/framework/sessions \
+             /var/www/bootstrap/cache
+
+RUN chown -R www-data:www-data /var/www/storage /var/www/bootstrap/cache
+RUN chmod -R 775 /var/www/storage /var/www/bootstrap/cache
+
 # Expose port and start Nginx + PHP-FPM
 EXPOSE 80
 CMD php-fpm -D && nginx -g 'daemon off;'
