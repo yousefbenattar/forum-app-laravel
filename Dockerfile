@@ -1,4 +1,4 @@
-FROM php:8.2-fpm
+FROM php:8.4-fpm
 
 # Install system dependencies and PHP extensions
 # (including pdo_mysql for your Aiven database)
