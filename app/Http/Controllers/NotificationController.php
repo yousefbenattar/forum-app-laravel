@@ -8,7 +8,7 @@ class NotificationController extends Controller
 {
     public function index()
 {
-    $notifications = auth()->user()->notifications()->paginate(10);
+    $notifications = auth()->user()->notifications()->paginate(20);
     
     // Mark them as read so the bell stops ringing next time they load a page
     auth()->user()->unreadNotifications->markAsRead();

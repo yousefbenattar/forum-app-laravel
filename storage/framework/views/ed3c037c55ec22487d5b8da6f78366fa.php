@@ -10,7 +10,16 @@
 <?php $component->withAttributes([]); ?>
 <?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::processComponentKey($component); ?>
 
-    <div class="py-4 text-xl">
+    <div x-data="{
+    preview : null,
+    updatePreview(event) {
+            const file = event.target.files[0];
+
+            if (!file) return;
+
+            this.preview = URL.createObjectURL(file);
+        }
+             }" class="py-4 text-xl">
         <div class="max-w-3xl mx-auto sm:px-6 lg:px-8">
             <h1 class="text-3xl mb-4 text-right">إنشاء منشور جديد</h1>
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-8">
@@ -114,28 +123,21 @@
 <?php unset($__componentOriginale3da9d84bb64e4bc2eeebaafabfb2581); ?>
 <?php endif; ?>
 
-                        <?php if (isset($component)) { $__componentOriginal18c21970322f9e5c938bc954620c12bb = $component; } ?>
-<?php if (isset($attributes)) { $__attributesOriginal18c21970322f9e5c938bc954620c12bb = $attributes; } ?>
-<?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'components.text-input','data' => ['id' => 'image','class' => 'block mt-1 w-full text-right','type' => 'file','name' => 'image','value' => old('image'),'placeholder' => 'صورة (اختياري)','autofocus' => true]] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? $attributes->all() : [])); ?>
-<?php $component->withName('text-input'); ?>
-<?php if ($component->shouldRender()): ?>
-<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
-<?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag): ?>
-<?php $attributes = $attributes->except(\Illuminate\View\AnonymousComponent::ignoredParameterNames()); ?>
-<?php endif; ?>
-<?php $component->withAttributes(['id' => 'image','class' => 'block mt-1 w-full text-right','type' => 'file','name' => 'image','value' => \Illuminate\View\Compilers\BladeCompiler::sanitizeComponentAttribute(old('image')),'placeholder' => 'صورة (اختياري)','autofocus' => true]); ?>
-<?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::processComponentKey($component); ?>
+                        <input id="image" name="image" type="file" x-ref="file" class="hidden" accept="image/*"
+                            @change="updatePreview($event)">
+                        <div @click="$refs.file.click()"
+                            class="min-h-48 border-2 border-dashed border-gray-300 rounded-xl flex items-center justify-center cursor-pointer ">
+                            <template x-if="!preview">
+                                <div class="text-center">
+                                    <div class="text-4xl">📷</div>
+                                    <p>اختر صورة للمقال</p>
+                                </div>
+                            </template>
 
-<?php echo $__env->renderComponent(); ?>
-<?php endif; ?>
-<?php if (isset($__attributesOriginal18c21970322f9e5c938bc954620c12bb)): ?>
-<?php $attributes = $__attributesOriginal18c21970322f9e5c938bc954620c12bb; ?>
-<?php unset($__attributesOriginal18c21970322f9e5c938bc954620c12bb); ?>
-<?php endif; ?>
-<?php if (isset($__componentOriginal18c21970322f9e5c938bc954620c12bb)): ?>
-<?php $component = $__componentOriginal18c21970322f9e5c938bc954620c12bb; ?>
-<?php unset($__componentOriginal18c21970322f9e5c938bc954620c12bb); ?>
-<?php endif; ?>
+                            <template x-if="preview">
+                                <img :src="preview" class="w-full h-full object-cover">
+                            </template>
+                        </div>
                         <?php if (isset($component)) { $__componentOriginalf94ed9c5393ef72725d159fe01139746 = $component; } ?>
 <?php if (isset($attributes)) { $__attributesOriginalf94ed9c5393ef72725d159fe01139746 = $attributes; } ?>
 <?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'components.input-error','data' => ['messages' => $errors->get('image'),'class' => 'mt-2 text-right']] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? $attributes->all() : [])); ?>
@@ -161,8 +163,7 @@
                     </div>
                     <!-- Category -->
                     <div class="flex flex-col my-4">
-                       
-                            <?php if (isset($component)) { $__componentOriginale3da9d84bb64e4bc2eeebaafabfb2581 = $component; } ?>
+                        <?php if (isset($component)) { $__componentOriginale3da9d84bb64e4bc2eeebaafabfb2581 = $component; } ?>
 <?php if (isset($attributes)) { $__attributesOriginale3da9d84bb64e4bc2eeebaafabfb2581 = $attributes; } ?>
 <?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'components.input-label','data' => ['for' => 'category_id','value' => __('الفئة')]] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? $attributes->all() : [])); ?>
 <?php $component->withName('input-label'); ?>
@@ -184,7 +185,6 @@
 <?php $component = $__componentOriginale3da9d84bb64e4bc2eeebaafabfb2581; ?>
 <?php unset($__componentOriginale3da9d84bb64e4bc2eeebaafabfb2581); ?>
 <?php endif; ?>
-                        
                         <select id="category_id" name="category_id" dir="rtl"
                             class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full text-right">
                             <option value="">اختر فئة</option>

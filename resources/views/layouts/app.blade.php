@@ -12,6 +12,7 @@
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @livewireStyles
 </head>
 
 <body class="font-sans antialiased bg-white">
@@ -31,7 +32,7 @@
         <main class="flex ">
             @auth
                 <div class="w-1/6">
-                    <x-right-side-bar></x-right-side-bar>
+                    <x-right-side-bar/>
                 </div>
                 <div class="w-4/6">
                     {{ $slot }}

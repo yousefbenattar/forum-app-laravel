@@ -2,9 +2,9 @@
 
 use Livewire\Component;
 use Livewire\Attributes\Layout;
-use App\Models\User;
 use Livewire\Attributes\On; // 1. Make sure to import the On attribute!
-new #[Layout('layouts::app')] class extends Component
+
+new #[Layout('layouts::app')] class extends Component 
 {
 
     public string $search = "";
@@ -22,7 +22,7 @@ new #[Layout('layouts::app')] class extends Component
         return auth()->user()->bookmarkedPosts()
             ->where(function ($query) {
                 $query->where('posts.title', 'like', "%{$this->search}%")
-                      ->orWhere('posts.content', 'like', "%{$this->search}%");
+                    ->orWhere('posts.content', 'like', "%{$this->search}%");
             })
             ->latest('posts.created_at')
             ->get();
@@ -48,26 +48,28 @@ new #[Layout('layouts::app')] class extends Component
             </svg>
             <p class="text-2xl">إشاراتي المرجعية : </p>
         </div>
-        
 
-    <form class="px-6 py-4" wire:submit="refreshList">
-        <label for="search" class="block mb-2.5 text-sm font-medium text-heading sr-only">بحث</label>
-        <div class="relative">
-            <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
-                <svg class="w-4 h-4 text-body" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                    <path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="m21 21-3.5-3.5M17 10a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z" />
-                </svg>
+
+        <form class="px-6 py-4" wire:submit="refreshList">
+            <label for="search" class="block mb-2.5 text-sm font-medium text-heading sr-only">بحث</label>
+            <div class="relative">
+                <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                    <svg class="w-4 h-4 text-body" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
+                        height="24" fill="none" viewBox="0 0 24 24">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-width="2"
+                            d="m21 21-3.5-3.5M17 10a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z" />
+                    </svg>
+                </div>
+                <input wire:model.live="search" type="search" id="search"
+                    class="block w-full p-3 ps-9 bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-md focus:ring-brand focus:border-brand shadow-xs placeholder:text-body"
+                    placeholder="بحث" required />
             </div>
-            <input wire:model.live="search" type="search" id="search"
-                class="block w-full p-3 ps-9 bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-md focus:ring-brand focus:border-brand shadow-xs placeholder:text-body"
-                placeholder="بحث" required />
-        </div>
-    </form>
- 
+        </form>
+
 
         @forelse ($this->posts() as $post)
+            <livewire:pages::bookmark.search-results :post="$post" :key="$post->id" />
 
-            <livewire:search-results :post="$post" :key="$post->id"></livewire:search-results>
         @empty
             <div class="text-center text-gray-400">لم يتم العثور على أي منشورات محفوظة</div>
         @endforelse

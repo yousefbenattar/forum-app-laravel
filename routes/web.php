@@ -19,6 +19,7 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::livewire('/','pages::posts.index')->name('dashboard');
+ Route::livewire('/posts/{post}', 'pages::posts.show')->name('posts.show');
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/search', [SearchController::class, 'index'])->name('posts.search');
@@ -30,7 +31,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::get('/post', [PostController::class, 'create'])->name('posts.create');
     Route::post('/post', [PostController::class, 'store'])->name('posts.store');
-    Route::livewire('/posts/{post}', 'pages::posts.index')->name('posts.show');
+
+   
 
 
     Route::post('/comment', [CommentController::class, 'create']);
@@ -42,10 +44,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::livewire('/bookmarks','pages::bookmark.index')->name('bookmark.index');
     Route::livewire('/chat/{conversation?}', 'pages::chat.index')->name('chat.index');
     Route::livewire('/ai', 'pages::chat_ai.index')->name('ai.index');
-    Route::livewire('/dashboard', 'pages::admin.index')->name('admin.dashboard');
+    Route::livewire('/admin', 'pages::admin.index')->name('admin.dashboard');
     Route::livewire('/admin/users', 'pages::admin.users')->name('admin.users');
     Route::livewire('/admin/logs', 'pages::admin.logs')->name('admin.logs');
-    Route::livewire('/admin/moderation', 'pages::moderation.index')->name('moderation.index');
+    Route::livewire('/admin/moderation', 'pages::admin.moderation')->name('index.moderation');
 
     Route::get('/ai/conversations/{id}', [AiChatController::class, 'show']);
     Route::post('/ai-chat', [AiChatController::class, 'handle']);

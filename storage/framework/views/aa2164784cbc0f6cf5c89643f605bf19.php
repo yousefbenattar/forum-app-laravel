@@ -4,6 +4,7 @@ use Livewire\Attributes\Layout;
 use Livewire\Attributes\Computed;
 use App\Models\Conversation;
 use App\Models\User;
+use App\Notifications\NewMessageNotification;
 use Livewire\Attributes\On;
 ?>
 
@@ -16,7 +17,7 @@ use Livewire\Attributes\On;
                 <p class="flex flex-col px-4 py-2 text-2xl">محادثات</p>
                 <div class="flex gap-2 p-2">
                     <button class="bg-[#79af9d] rounded-full py-2 px-3 cursor-pointer text-white">الجميع</button>
-                    <button @click="" class="bg-[#79af9d]/50 rounded-full py-2 px-3 cursor-pointer text-white">لم أجبها</button>
+                    <button class="bg-[#79af9d]/50 rounded-full py-2 px-3 cursor-pointer text-white">لم أجبها</button>
                 </div>
                 <ul class="flex flex-col items-end gap-3 p-2 m-2">
                     <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::openLoop(); ?><?php endif; ?><?php $__empty_1 = true; $__currentLoopData = $this->getConversations(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $conversation): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::startLoopIteration(); ?><?php endif; ?>
@@ -54,7 +55,7 @@ use Livewire\Attributes\On;
                             <div class="flex items-center gap-4">
                                 
                                 <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if($conversation->unread_messages_count > 0): ?>
-                                    <span class="bg-blue-500 rounded-full min-w-6 h-6 px-2 flex items-center justify-center text-white text-xs font-bold animate-pulse">
+                                    <span class="bg-[#79af9d] rounded-full min-w-6 h-6 px-2 flex items-center justify-center text-white text-xs font-bold ">
                                         <?php echo e($conversation->unread_messages_count); ?>
 
                                     </span>

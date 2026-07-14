@@ -4,7 +4,8 @@
             class="fixed inset-0 bg-black/50 backdrop-blur-sm z-40">
         </div>
 
-        <div x-show="sidebarOpen" class="fixed inset-y-0 right-0 w-60 bg-white text-black z-50 p-6 shadow-2xl">
+        <div x-show="sidebarOpen"
+        class="fixed inset-y-0 right-0 w-60 bg-white text-black z-50 p-6 shadow-2xl">
 
             <div class="flex flex-col justify-end h-full font-bold ">
                 <div class="mb-8">
@@ -47,7 +48,8 @@
                             <p>إعدادات</p>
                         </a>
                         @role('admin')
-                        <a href='/dashboard' class="block text-l hover:text-[#79af9d] flex items-center gap-2">
+                        <a href='/admin'
+                         class="block text-l hover:text-[#79af9d] flex items-center gap-2">
 
                             <x-ik-dashboard class="w-6 h-6" />
                             <p>الأدمن</p>

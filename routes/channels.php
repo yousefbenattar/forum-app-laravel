@@ -22,6 +22,6 @@ Broadcast::channel('chat.{conversationId}', function ($user, $conversationId) {
     }
 
     // A user can ONLY join this private channel if they are the sender OR the receiver!
-    return (int) $user->id === (int) $conversation->sender_id || 
+    return (int) $user->id === (int) $conversation->sender_id ||
            (int) $user->id === (int) $conversation->receiver_id;
 });

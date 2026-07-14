@@ -3,14 +3,21 @@
 use Livewire\Component;
 use App\Models\User;
 use Livewire\Attributes\Layout;
-
-new #[Layout('layouts::app3')] class extends Component 
+use Livewire\Attributes\On;
+new #[Layout('layouts::app3')] class extends Component
 {
 
     public $query;
+    #[On('user-deleted')]
+public function refreshUsersList()
+{
+    // This can be empty! Just receiving the event forces Livewire 
+    // to instantly update the parent DOM seamlessly.
+}
     public function getusers()
     {
-        return User::where('name', 'like', "%{$this->query}%")->orderBy("id")->paginate(10)->withQueryString();
+        return User::where('name', 'like', "%{$this->query}%")
+        ->orderBy("id")->paginate(20)->withQueryString();
     }
 };
 ?>
@@ -30,22 +37,7 @@ showFilters: false,
             <input wire:model.live="query" type="text" placeholder="ابحث عن مستخدم"
                 class="border border-gray-300 rounded-md px-2 py-1">
             <div class="flex items-center gap-2">
-                <div class="relative" @click.away="showFilters = false">
-                    <button @click="showFilters = true" class="flex items-center gap-1 p-1 rounded-md">
-                        <p>الفلاتر</p><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                            class="bi bi-chevron-compact-down" viewBox="0 0 16 16">
-                            <path fill-rule="evenodd"
-                                d="M1.553 6.776a.5.5 0 0 1 .67-.223L8 9.44l5.776-2.888a.5.5 0 1 1 .448.894l-6 3a.5.5 0 0 1-.448 0l-6-3a.5.5 0 0 1-.223-.67" />
-                        </svg>
-                    </button>
-                    <div x-show="showFilters">
 
-                        <div class="absolute z-50 left-0 mt-2 bg-white shadow-lg rounded-md flex flex-col w-max">
-                            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Edit User</a>
-                            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Delete User</a>
-                        </div>
-                    </div>
-                </div>
                 <div class="flex items-center gap-1 p-1 rounded-md">
                     <p>أضف</p>
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"

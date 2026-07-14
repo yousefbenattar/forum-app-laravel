@@ -20,6 +20,11 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->timestamp('suspended_until')->nullable();
+            $table->timestamp('banned_at')->nullable();
+            $table->string('ban_reason')->nullable();
+            $table->unsignedBigInteger('xp')->default(0);
+            $table->unsignedInteger('level')->default(1);
             $table->rememberToken();
             $table->timestamps();
         });

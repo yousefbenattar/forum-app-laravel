@@ -1,6 +1,6 @@
 <!-- Added dir="rtl" and a font suitable for Arabic -->
-<a href="/posts/{{ $post->id }}" class="group" dir="rtl">
-    <div 
+<a href="{{ route('posts.show', $post->id) }}" class="group" dir="rtl">
+    <div
         class="m-5 flex flex-row bg-white border border-gray-200 rounded-md shadow-sm overflow-hidden group-hover:border-[#79af9d]">
 
         <!-- 1. Image: Now appears on the right in RTL -->

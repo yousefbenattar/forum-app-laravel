@@ -5,6 +5,7 @@ use Livewire\Attributes\Layout;
 use Livewire\Attributes\Computed;
 use App\Models\Conversation;
 use App\Models\User;
+use App\Notifications\NewMessageNotification;
 use Livewire\Attributes\On;
 
 new #[Layout('layouts::app2')] class extends Component
@@ -17,6 +18,7 @@ new #[Layout('layouts::app2')] class extends Component
         if ($conversation) {
             $this->selectedConversation = Conversation::find($conversation);
         }
+        
     }
 
     public function selectConversation(Conversation $conversation)
@@ -74,7 +76,7 @@ new #[Layout('layouts::app2')] class extends Component
                 <p class="flex flex-col px-4 py-2 text-2xl">محادثات</p>
                 <div class="flex gap-2 p-2">
                     <button class="bg-[#79af9d] rounded-full py-2 px-3 cursor-pointer text-white">الجميع</button>
-                    <button @click="" class="bg-[#79af9d]/50 rounded-full py-2 px-3 cursor-pointer text-white">لم أجبها</button>
+                    <button class="bg-[#79af9d]/50 rounded-full py-2 px-3 cursor-pointer text-white">لم أجبها</button>
                 </div>
                 <ul class="flex flex-col items-end gap-3 p-2 m-2">
                     @forelse ($this->getConversations() as $conversation)
@@ -111,7 +113,7 @@ new #[Layout('layouts::app2')] class extends Component
                             <div class="flex items-center gap-4">
                                 {{-- FIXED: Changed unreadMessages_count to snake_case unread_messages_count --}}
                                 @if($conversation->unread_messages_count > 0)
-                                    <span class="bg-blue-500 rounded-full min-w-6 h-6 px-2 flex items-center justify-center text-white text-xs font-bold animate-pulse">
+                                    <span class="bg-[#79af9d] rounded-full min-w-6 h-6 px-2 flex items-center justify-center text-white text-xs font-bold ">
                                         {{ $conversation->unread_messages_count }}
                                     </span>
                                 @endif

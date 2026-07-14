@@ -13,7 +13,7 @@ class FollowObserver
     public function created(Follow $follow): void
     {
         Activity::create([
-            'user_id' => $follow->user_id,
+            'user_id' => $follow->follower_id,
             'subject_id' => $follow->id,
             'subject_type' => Follow::class,
             'type' => 'followed'

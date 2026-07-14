@@ -1,25 +1,16 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<?php if (isset($component)) { $__componentOriginalb6ae7b16225a8198d83db1c2d27f7827 = $component; } ?>
+<?php if (isset($attributes)) { $__attributesOriginalb6ae7b16225a8198d83db1c2d27f7827 = $attributes; } ?>
+<?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'components.better','data' => []] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? $attributes->all() : [])); ?>
+<?php $component->withName('better'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag): ?>
+<?php $attributes = $attributes->except(\Illuminate\View\AnonymousComponent::ignoredParameterNames()); ?>
+<?php endif; ?>
+<?php $component->withAttributes([]); ?>
+<?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::processComponentKey($component); ?>
 
-        <title><?php echo e($title ?? config('app.name')); ?></title>
-
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.bunny.net">
-    <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
-
- <!-- Scripts -->
-        <?php echo app('Illuminate\Foundation\Vite')(['resources/css/app.css', 'resources/js/app.js']); ?>
-     
-        
-    </head>
-   <body class="font-sans antialiased">
     <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
-        <?php echo $__env->make('layouts.navigation', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
-
-        <!-- Page Heading -->
         <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if(isset($header)): ?>
             <header class="bg-[#79af9d] dark:bg-gray-800 shadow">
                 <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
@@ -28,7 +19,6 @@
                 </div>
             </header>
         <?php endif; ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
-
         <!-- Page Content -->
         <main class=" ">
             <div class="flex ">
@@ -59,7 +49,6 @@
                 <div class="w-4/5">
                     <div class="flex items-center gap-4 mb-6">
                         <h1 class="text-2xl font-bold py-2">منشوراتي</h1>
-                        
                     </div>
                     <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::openLoop(); ?><?php endif; ?><?php $__empty_1 = true; $__currentLoopData = $posts; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $post): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::startLoopIteration(); ?><?php endif; ?>
                         <?php if (isset($component)) { $__componentOriginalfb314f739d8d594f4055ce4bb169c909 = $component; } ?>
@@ -88,22 +77,15 @@
                     <?php endif; ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
                 </div>
             </div>
-
         </main>
     </div>
-  
-</body>
-<footer>
-    <div class="bg-[#79af9d]  text-center text-white mt-2 py-4">
-    
-    جميع الحقوق محفوظة لمنتدى التاريخ البديل
-        &copy; <?php echo e(date('Y')); ?>
-
-
-
-    </div>
-</footer>
-   
-</html>
-
- <?php /**PATH E:\Laravel-2026\forum\resources\views/user/show.blade.php ENDPATH**/ ?>
+ <?php echo $__env->renderComponent(); ?>
+<?php endif; ?>
+<?php if (isset($__attributesOriginalb6ae7b16225a8198d83db1c2d27f7827)): ?>
+<?php $attributes = $__attributesOriginalb6ae7b16225a8198d83db1c2d27f7827; ?>
+<?php unset($__attributesOriginalb6ae7b16225a8198d83db1c2d27f7827); ?>
+<?php endif; ?>
+<?php if (isset($__componentOriginalb6ae7b16225a8198d83db1c2d27f7827)): ?>
+<?php $component = $__componentOriginalb6ae7b16225a8198d83db1c2d27f7827; ?>
+<?php unset($__componentOriginalb6ae7b16225a8198d83db1c2d27f7827); ?>
+<?php endif; ?><?php /**PATH E:\Laravel-2026\forum\resources\views/user/show.blade.php ENDPATH**/ ?>

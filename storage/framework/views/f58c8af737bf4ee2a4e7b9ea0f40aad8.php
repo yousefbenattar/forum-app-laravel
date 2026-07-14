@@ -1,11 +1,11 @@
 <?php
 use Livewire\Component;
-use App\Models\Conversation;
-use App\Models\User;
 use App\Events\MessageSent;
 use App\Events\MessageRead;
 use App\Models\Message;
+use App\Models\User;
 use Livewire\Attributes\On;
+use App\Notifications\NewMessageNotification;
 ?>
 
 <div class="p-4 flex flex-col justify-between bg-gray-50 h-full max-h-[85vh]">

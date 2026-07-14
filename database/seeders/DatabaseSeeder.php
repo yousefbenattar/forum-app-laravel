@@ -17,122 +17,126 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
 
-        // $this->call([
-        //     RolesAndPermissionsSeeder::class,
-        // ]);
+        $this->call([
+            RolesAndPermissionsSeeder::class,
+        ]);
 
-        // $users = [
+        $users = [
 
-        //     [
-        //         "name" => "Adolf Hitler",
-        //         "username" => "adolf_hitler",
-        //         "bio" => "Adolf Hitler was an Austrian-born German politician who led Germany from 1933 to 1945 as head of the Nazi regime.",
-        //         "email" => "adolfhitler@mail.com",
-        //         "password" => "password",
-        //     ],
+            [
+        "name" => "ميكي ماوس",
+        "username" => "mickey_mouse",
+        "bio" => "ميكي ماوس هو أشهر شخصيات ديزني ويُعرف بروحه المرحة ومغامراته الممتعة مع أصدقائه.",
+        "email" => "mickey@mail.com",
+        "password" => "password",
+    ],
 
-        //     [
-        //         "name" => "Joseph Stalin",
-        //         "username" => "joseph_stalin",
-        //         "bio" => "Joseph Stalin was the leader of the Soviet Union from the mid-1920s until 1953, overseeing industrialization and World War II mobilization.",
-        //         "email" => "josephstalin@mail.com",
-        //         "password" => "password",
-        //     ],
+    [
+        "name" => "ميني ماوس",
+        "username" => "minnie_mouse",
+        "bio" => "ميني ماوس هي صديقة ميكي وتتميز بأناقتها ولطفها وحبها لمساعدة الآخرين.",
+        "email" => "minnie@mail.com",
+        "password" => "password",
+    ],
 
-        //     [
-        //         "name" => "Winston Churchill",
-        //         "username" => "winston_churchill",
-        //         "bio" => "Winston Churchill served as Prime Minister of the United Kingdom during World War II and is known for his leadership and speeches.",
-        //         "email" => "winstonchurchill@mail.com",
-        //         "password" => "password",
-        //     ],
+    [
+        "name" => "دونالد داك",
+        "username" => "donald_duck",
+        "bio" => "دونالد داك بطة مشهورة من ديزني معروفة بطباعها الغاضبة ولكنها طيبة القلب.",
+        "email" => "donald@mail.com",
+        "password" => "password",
+    ],
 
-        //     [
-        //         "name" => "Franklin D. Roosevelt",
-        //         "username" => "franklin_roosevelt",
-        //         "bio" => "Franklin D. Roosevelt was the 32nd President of the United States and led the country through the Great Depression and most of World War II.",
-        //         "email" => "fdr@mail.com",
-        //         "password" => "password",
-        //     ],
+    [
+        "name" => "جوفي",
+        "username" => "goofy",
+        "bio" => "جوفي شخصية مرحة وعفوية، يشتهر بمواقفه الكوميدية وإخلاصه لأصدقائه.",
+        "email" => "goofy@mail.com",
+        "password" => "password",
+    ],
 
-        //     [
-        //         "name" => "Benito Mussolini",
-        //         "username" => "benito_mussolini",
-        //         "bio" => "Benito Mussolini was the leader of Fascist Italy from 1922 to 1943 and an ally of Nazi Germany during World War II.",
-        //         "email" => "mussolini@mail.com",
-        //         "password" => "password",
-        //     ],
+    [
+        "name" => "بلوتو",
+        "username" => "pluto",
+        "bio" => "بلوتو هو الكلب الوفي لميكي ماوس ويشارك في العديد من المغامرات الممتعة.",
+        "email" => "pluto@mail.com",
+        "password" => "password",
+    ],
 
-        //     [
-        //         "name" => "Josip Broz Tito",
-        //         "username" => "josip_tito",
-        //         "bio" => "Josip Broz Tito was the president of Yugoslavia and led the country as a socialist federation after World War II.",
-        //         "email" => "tito@mail.com",
-        //         "password" => "password",
-        //     ],
+    [
+        "name" => "سيمبا",
+        "username" => "simba",
+        "bio" => "سيمبا هو بطل فيلم الأسد الملك، ويتعلم معنى المسؤولية والشجاعة خلال رحلته.",
+        "email" => "simba@mail.com",
+        "password" => "password",
+    ],
 
-        //     [
-        //         "name" => "Mao Zedong",
-        //         "username" => "mao_zedong",
-        //         "bio" => "Mao Zedong was the founding leader of the People's Republic of China and chairman of the Chinese Communist Party.",
-        //         "email" => "mao@mail.com",
-        //         "password" => "password",
-        //     ],
+    [
+        "name" => "إلسا",
+        "username" => "elsa",
+        "bio" => "إلسا هي ملكة أريندل وتملك قدرة سحرية على التحكم بالجليد والثلج.",
+        "email" => "elsa@mail.com",
+        "password" => "password",
+    ],
 
-        //     [
-        //         "name" => "Chiang Kai-shek",
-        //         "username" => "chiang_kaishek",
-        //         "bio" => "Chiang Kai-shek was a Chinese political and military leader who headed the Republic of China government before relocating to Taiwan.",
-        //         "email" => "chiang@mail.com",
-        //         "password" => "password",
-        //     ],
+    [
+        "name" => "آنا",
+        "username" => "anna",
+        "bio" => "آنا هي أخت إلسا، وتتميز بشجاعتها وتفاؤلها وإخلاصها لعائلتها.",
+        "email" => "anna@mail.com",
+        "password" => "password",
+    ],
 
-        //     [
-        //         "name" => "Hirohito",
-        //         "username" => "hirohito",
-        //         "bio" => "Hirohito was the Emperor of Japan from 1926 to 1989, including during the period of World War II.",
-        //         "email" => "hirohito@mail.com",
-        //         "password" => "password",
-        //     ],
+    [
+        "name" => "علاء الدين",
+        "username" => "aladdin",
+        "bio" => "علاء الدين شاب مغامر يعثر على مصباح سحري يغيّر حياته ويقوده إلى تحقيق أحلامه.",
+        "email" => "aladdin@mail.com",
+        "password" => "password",
+    ],
 
-        //     [
-        //         "name" => "Charles de Gaulle",
-        //         "username" => "charles_degaulle",
-        //         "bio" => "Charles de Gaulle was a French general and statesman who led Free France during World War II and later became President of France.",
-        //         "email" => "degaulle@mail.com",
-        //         "password" => "password",
-        //     ],
+    [
+        "name" => "باز يطير",
+        "username" => "buzz_lightyear",
+        "bio" => "باز يطير هو حارس فضاء شجاع من سلسلة توي ستوري، يؤمن بحماية أصدقائه وخوض المغامرات.",
+        "email" => "buzz@mail.com",
+        "password" => "password",
+    ],
 
-        // ];
+        ];
 
 
-        //  $categories = [
-        //      ' ماذا لو ؟','نظريات','جغرافيا','التاريخ العسكري','حروب عالمية','تحليلات','الأسئلة','إقتراحات'
-        //  ];
-        // $categories = [
-        //     'دول'
-        // ];
-        // foreach ($categories as $category) {
-        //     Category::create([
-        //         'name' => $category,
-        //         'slug' => Str::slug($category),
-        //     ]);
-        // }
-        //   foreach ($users as $user) {
-        //       User::create([
-        //           'name' => $user['name'],
-        //           'username' => $user['username'],
-        //           'bio' => $user['bio'],
-        //           'email' => $user['email'],
-        //           'password' => $user['password'],
+        $categories = [
+            ' ماذا لو ؟',
+            'نظريات',
+            'جغرافيا',
+            'التاريخ العسكري',
+            'حروب عالمية',
+            'تحليلات',
+            'الأسئلة',
+            'إقتراحات',
+            'دول'
+        ];
 
-        //       ]);
-        //   }
+        foreach ($categories as $category) {
+            Category::create([
+                'name' => $category,
+                'slug' => Str::slug($category),
+            ]);
+        }
+        foreach ($users as $user) {
+            User::create([
+                'name' => $user['name'],
+                'username' => $user['username'],
+                'bio' => $user['bio'],
+                'email' => $user['email'],
+                'password' => $user['password'],
 
-        Post::factory(10)->create();
+            ]);
+        }
+
+        Post::factory(50)->create();
     }
-
-
 
 }
 

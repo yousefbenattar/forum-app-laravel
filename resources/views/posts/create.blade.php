@@ -1,5 +1,14 @@
 <x-better>
-    <div class="py-4 text-xl">
+    <div x-data="{
+    preview : null,
+    updatePreview(event) {
+            const file = event.target.files[0];
+
+            if (!file) return;
+
+            this.preview = URL.createObjectURL(file);
+        }
+             }" class="py-4 text-xl">
         <div class="max-w-3xl mx-auto sm:px-6 lg:px-8">
             <h1 class="text-3xl mb-4 text-right">إنشاء منشور جديد</h1>
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-8">
@@ -20,15 +29,26 @@
 
                         <x-input-label for="image" :value="__('صورة (اختياري)')" />
 
-                        <x-text-input id="image" class="block mt-1 w-full text-right" type="file" name="image"
-                            :value="old('image')" placeholder="صورة (اختياري)" autofocus />
+                        <input id="image" name="image" type="file" x-ref="file" class="hidden" accept="image/*"
+                            @change="updatePreview($event)">
+                        <div @click="$refs.file.click()"
+                            class="min-h-48 border-2 border-dashed border-gray-300 rounded-xl flex items-center justify-center cursor-pointer ">
+                            <template x-if="!preview">
+                                <div class="text-center">
+                                    <div class="text-4xl">📷</div>
+                                    <p>اختر صورة للمقال</p>
+                                </div>
+                            </template>
+
+                            <template x-if="preview">
+                                <img :src="preview" class="w-full h-full object-cover">
+                            </template>
+                        </div>
                         <x-input-error :messages="$errors->get('image')" class="mt-2 text-right" />
                     </div>
                     <!-- Category -->
                     <div class="flex flex-col my-4">
-                       
-                            <x-input-label for="category_id" :value="__('الفئة')" />
-                        
+                        <x-input-label for="category_id" :value="__('الفئة')" />
                         <select id="category_id" name="category_id" dir="rtl"
                             class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full text-right">
                             <option value="">اختر فئة</option>
@@ -45,9 +65,8 @@
 
                         <x-input-label for="content" :value="__('المحتوى')" />
 
-                        <x-input-textarea id="content" 
-                        class="block mt-1 w-full text-right rounded-md shadow-sm" type="text" name="content"
-                            :value="old('content')" required>
+                        <x-input-textarea id="content" class="block mt-1 w-full text-right rounded-md shadow-sm"
+                            type="text" name="content" :value="old('content')" required>
                         </x-input-textarea>
                         <x-input-error :messages="$errors->get('content')" class="mt-2 text-right" />
                     </div>

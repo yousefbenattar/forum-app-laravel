@@ -1,12 +1,12 @@
 <?php
 
 use Livewire\Component;
-use App\Models\Conversation;
-use App\Models\User;
 use App\Events\MessageSent;
 use App\Events\MessageRead;
 use App\Models\Message;
+use App\Models\User;
 use Livewire\Attributes\On;
+use App\Notifications\NewMessageNotification;
 
 new class extends Component {
     public $selectedConversation;
@@ -16,6 +16,13 @@ new class extends Component {
     public function mount($selectedConversation)
     {
         $this->selectedConversation = $selectedConversation;
+        auth()->user()->unreadNotifications->where('type',NewMessageNotification::class)
+        // Filter down to ONLY notifications matching this specific conversation/chat
+            ->filter(function ($notification) {
+                // Ensure your notification payload stores 'conversation_id' or check via 'message_id'
+                return $notification->data['conversation_id'] == $this->selectedConversation->id;
+            })
+        ->markAsRead();
         $this->markMessagesAsRead();
     }
 
@@ -69,6 +76,10 @@ new class extends Component {
         ]);
 
         MessageSent::dispatch($message);
+        // 2. Fetch the receiver model instance
+        $receiver = User::findOrFail($receiverId);
+        // 3. Trigger your new notification step!
+        $receiver->notify(new NewMessageNotification($message));
 
         $this->reset('body');
         $this->dispatch('scroll-to-bottom');

@@ -1,8 +1,5 @@
-<nav x-data="{
-sidebarOpen: false ,
- chatAiOpen :false ,
-ring : true ,
-}" class="bg-[#79af9d] dark:bg-gray-800 border-b border-gray-100 dark:border-gray-700">
+<nav x-data="{sidebarOpen: false}"
+class="bg-[#79af9d] dark:bg-gray-800 border-b border-gray-100 dark:border-gray-700">
     <!-- Primary Navigation Menu -->
     <div class=" mx-auto px-2 sm:px-2 lg:px-8 bg-[#79af9d]">
         <div class="flex justify-between h-16">

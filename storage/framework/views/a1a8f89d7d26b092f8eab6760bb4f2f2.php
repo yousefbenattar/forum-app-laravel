@@ -1,0 +1,264 @@
+<?php
+use Livewire\Component;
+use App\Models\User;
+use App\Models\Post;
+use App\Models\Comment;
+use App\Models\Category;
+use Livewire\Attributes\Layout;
+?>
+
+<div dir="rtl" class="p-6 bg-white min-h-screen text-right">
+
+    <div class="flex items-center justify-between mb-6">
+        <h1 class="text-xl font-bold text-gray-800 dark:text-white">لوحة التحكم الرئيسية</h1>
+ <select wire:model.change="days" class="rounded-md border-gray-300 dark:bg-gray-700 dark:text-white text-sm">
+            <option value="7">أخر 7 أيام</option>
+            <option value="30">أخر شهر</option>
+            <option value="365">أخر سنة</option>
+            <option value="0">الجميع</option>
+        </select>
+    </div>
+
+    
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
+        <div class="bg-white dark:bg-gray-800 p-4 rounded-lg shadow ">
+            <p class="text-sm text-gray-500 dark:text-gray-400 font-medium">إجمالي الأعضاء</p>
+            <p class="text-2xl font-bold text-gray-900 dark:text-white mt-1"><?php echo e($this->getTotalUsers()); ?></p>
+        </div>
+
+        <div class="bg-white dark:bg-gray-800 p-4 rounded-lg shadow ">
+            <p class="text-sm text-gray-500 dark:text-gray-400 font-medium">عدد المشرفين</p>
+            <p class="text-2xl font-bold text-gray-900 dark:text-white mt-1"><?php echo e($this->getTotalAdmins()); ?></p>
+        </div>
+
+        <div class="bg-white dark:bg-gray-800 p-4 rounded-lg shadow ">
+            <p class="text-sm text-gray-500 dark:text-gray-400 font-medium">المواضيع الجديدة اليوم</p>
+            <p class="text-2xl font-bold text-gray-900 dark:text-white mt-1"><?php echo e($this->getPostToday()); ?></p>
+        </div>
+
+        <div class="bg-white dark:bg-gray-800 p-4 rounded-lg shadow ">
+            <p class="text-sm text-gray-500 dark:text-gray-400 font-medium">الردود الجديدة اليوم</p>
+            <p class="text-2xl font-bold text-gray-900 dark:text-white mt-1"><?php echo e($this->getTotalComments()); ?></p>
+        </div>
+    </div>
+
+    
+    <div class="bg-white dark:bg-gray-800 w-full my-2 p-6 rounded-lg shadow mb-6">
+        <div class="flex flex-col md:flex-row items-center justify-between gap-4 mb-4">
+            <h2 class="text-lg font-bold text-gray-800 dark:text-white">📊 عدد المنشورات ( أخر ثلاثين يوم )</h2>
+        </div>
+
+        <div class="h-64 relative">
+            <canvas id="postsPerDayChart"></canvas>
+        </div>
+    </div>
+
+    
+    <div class="bg-white dark:bg-gray-800 w-full my-2 p-6 rounded-lg shadow mb-6">
+        <div class="flex flex-col md:flex-row items-center justify-between gap-4 mb-4">
+            <h2 class="text-lg font-bold text-gray-800 dark:text-white">📊 عدد الأعضاء الجدد( أخر ثلاثين يوم )</h2>
+        </div>
+
+        <div class="h-64 relative">
+            <canvas id="usersPerDayChart"></canvas>
+        </div>
+    </div>
+
+    
+    <div class="flex flex-col lg:flex-row bg-white dark:bg-gray-800 w-full my-2 p-6 rounded-lg shadow mb-6 gap-6">
+        <div class="w-full lg:w-1/2 flex flex-col">
+            <div class="flex flex-col md:flex-row items-center gap-4 mb-4">
+                <h2 class="text-lg font-bold text-gray-800 dark:text-white">📊المنشورات حسب الفئة</h2>
+            </div>
+            <div class="relative h-64">
+                <canvas id="postsPerCategory"></canvas>
+            </div>
+        </div>
+        <div class="w-full lg:w-1/2 flex flex-col">
+            <div class="flex flex-col md:flex-row items-center gap-4 mb-4">
+                <h2 class="text-lg font-bold text-gray-800 dark:text-white">📊عدد التعليقات (أخر ثلاثين يوم)</h2>
+            </div>
+            <div class="relative h-64">
+                <canvas id="commentsPerDayChart"></canvas>
+            </div>
+        </div>
+    </div>
+
+    
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        
+        <div class="bg-white dark:bg-gray-800 p-5 rounded-lg shadow">
+            <h2 class="text-lg font-bold text-gray-800 dark:text-white mb-4 flex items-center gap-2">
+                <span>🔥</span> المواضيع الأكثر تفاعلاً
+            </h2>
+            <div class="overflow-x-auto">
+                <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+                    <thead>
+                        <tr class="text-gray-500 dark:text-gray-400 text-xs font-medium border-b border-gray-200 dark:border-gray-700">
+                            <th class="py-2 text-right">عنوان الموضوع</th>
+                            <th class="py-2 text-center">الردود</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-100 dark:divide-gray-700 text-sm">
+                        <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::openLoop(); ?><?php endif; ?><?php $__empty_1 = true; $__currentLoopData = $this->getTopPosts(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $post): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::startLoopIteration(); ?><?php endif; ?>
+                            <tr>
+                                <td class="py-3 text-gray-900 dark:text-gray-200 font-medium"><?php echo e($post->title); ?></td>
+                                <td class="py-3 text-center">
+                                    <span class="bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-400 px-2 py-0.5 rounded-full text-xs font-bold">
+                                        <?php echo e($post->comments_count); ?>
+
+                                    </span>
+                                </td>
+                            </tr>
+                        <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::endLoop(); ?><?php endif; ?><?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::closeLoop(); ?><?php endif; ?>
+                            <tr>
+                                <td colspan="2" class="py-4 text-center text-gray-400">لا توجد مواضيع حالياً</td>
+                            </tr>
+                        <?php endif; ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        
+        <div class="bg-white dark:bg-gray-800 p-5 rounded-lg shadow">
+            <h2 class="text-lg font-bold text-gray-800 dark:text-white mb-4 flex items-center gap-2">
+                <span>🏆</span> المؤرخون الأكثر نشاطاً (هذا الأسبوع)
+            </h2>
+            <div class="overflow-x-auto">
+                <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+                    <thead>
+                        <tr class="text-gray-500 dark:text-gray-400 text-xs font-medium border-b border-gray-200 dark:border-gray-700">
+                            <th class="py-2 text-right">المستخدم</th>
+                            <th class="py-2 text-center">المشاركات</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-100 dark:divide-gray-700 text-sm">
+                        <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::openLoop(); ?><?php endif; ?><?php $__empty_1 = true; $__currentLoopData = $this->getTopContributors(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $user): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::startLoopIteration(); ?><?php endif; ?>
+                            <tr>
+                                <td class="py-3 text-gray-900 dark:text-gray-200 font-semibold">
+                                    <div class="flex items-center gap-2">
+                                        <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if($user->avatar): ?>
+                                            <img src="<?php echo e(Storage::url($user->avatar)); ?>" alt="<?php echo e($user->name); ?>" class="w-8 h-8 rounded-full" />
+                                        <?php else: ?>
+                                            <img src="<?php echo e(asset('images/profile.png')); ?>" alt="<?php echo e($user->name); ?>" class="w-8 h-8 rounded-full" />
+                                        <?php endif; ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
+                                        <p class="text-sm dark:text-white"><?php echo e($user->name); ?></p>
+                                    </div>
+                                </td>
+                                <td class="py-3 text-center text-gray-600 dark:text-gray-400"><?php echo e($user->posts_count); ?> مشاركة</td>
+                            </tr>
+                        <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::endLoop(); ?><?php endif; ?><?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::closeLoop(); ?><?php endif; ?>
+                            <tr>
+                                <td colspan="2" class="py-4 text-center text-gray-400">لا يوجد متفاعلين هذا الأسبوع</td>
+                            </tr>
+                        <?php endif; ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    
+    <script>
+        document.addEventListener('livewire:navigated', () => {
+            let postschartsInstance = null;
+            let userschartsInstance = null;
+            let categorieschartInstance = null;
+            let commentsChartInstance = null; 
+
+            function initAllCharts() {
+                // 1. Posts Chart
+                const ctxPosts = document.getElementById('postsPerDayChart');
+                if (ctxPosts) {
+                    if (postschartsInstance) postschartsInstance.destroy();
+                    postschartsInstance = new Chart(ctxPosts.getContext('2d'), {
+                        type: 'bar',
+                        data: {
+                            labels: <?php echo json_encode($this->getChartData()['labels'], 15, 512) ?>,
+                            datasets: [{
+                                label: 'المنشورات',
+                                data: <?php echo json_encode($this->getChartData()['values'], 15, 512) ?>,
+                                backgroundColor: '#3b82f6',
+                                borderRadius: 6
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            scales: { y: { beginAtZero: true, ticks: { precision: 0 } } },
+                            plugins: { legend: { display: false } }
+                        }
+                    });
+                }
+
+                // 2. Categories Chart
+                const ctxCategories = document.getElementById('postsPerCategory');
+                if (ctxCategories) {
+                    if (categorieschartInstance) categorieschartInstance.destroy();
+                    categorieschartInstance = new Chart(ctxCategories.getContext('2d'), {
+                        type: 'pie',
+                        data: {
+                            labels: <?php echo json_encode($this->postsPerCategory()['labels'], 15, 512) ?>,
+                            datasets: [{
+                                label: 'المنشورات',
+                                data: <?php echo json_encode($this->postsPerCategory()['values'], 15, 512) ?>,
+                                backgroundColor: [
+                                    'rgb(255, 0, 55)', 'rgb(3, 154, 255)', 'rgb(255, 218, 7)',
+                                    'rgb(162, 0, 255)', 'rgb(72, 179, 77)', 'rgb(167, 101, 47)',
+                                ],
+                            }]
+                        },
+                        options: { responsive: true, maintainAspectRatio: false }
+                    });
+                }
+
+                // 3. Users Chart
+                const ctxUsers = document.getElementById('usersPerDayChart');
+                if (ctxUsers) {
+                    if (userschartsInstance) userschartsInstance.destroy();
+                    userschartsInstance = new Chart(ctxUsers.getContext('2d'), {
+                        type: 'bar',
+                        data: {
+                            labels: <?php echo json_encode($this->getUsersPerDay()['labels'], 15, 512) ?>,
+                            datasets: [{
+                                label: 'المستخدمون',
+                                data: <?php echo json_encode($this->getUsersPerDay()['values'], 15, 512) ?>,
+                                backgroundColor: '#10b981',
+                                borderRadius: 6
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            scales: { y: { beginAtZero: true, ticks: { precision: 0 } } },
+                            plugins: { legend: { display: false } }
+                        }
+                    });
+                }
+
+                // 4. Comments Chart
+                const ctxComments = document.getElementById('commentsPerDayChart');
+                if (ctxComments) {
+                    if (commentsChartInstance) commentsChartInstance.destroy();
+                    commentsChartInstance = new Chart(ctxComments.getContext('2d'), {
+                        type: 'line',
+                        data: {
+                            labels: <?php echo json_encode($this->getCommentsPerDay()['labels'], 15, 512) ?>,
+                            datasets: [{
+                                label: 'التعليقات',
+                                data: <?php echo json_encode($this->getCommentsPerDay()['values'], 15, 512) ?>,
+                                borderColor: 'rgb(75, 192, 192)',
+                                backgroundColor: 'rgba(75, 192, 192, 0.1)',
+                                tension: 0.2,
+                                fill: true
+                            }]
+                        },
+                        options: { responsive: true, maintainAspectRatio: false }
+                    });
+                }
+            }
+            initAllCharts();
+        });
+    </script>
+</div><?php /**PATH E:\Laravel-2026\forum\storage\framework\views/livewire/views/8738fc3d.blade.php ENDPATH**/ ?>
